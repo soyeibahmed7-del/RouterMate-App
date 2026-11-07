@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<defs>
+ <linearGradient id="shell" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#00f4ff"/><stop offset=".38" stop-color="#075cff"/><stop offset=".7" stop-color="#6c12ff"/><stop offset="1" stop-color="#ff168f"/></linearGradient>
+ <linearGradient id="face" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#112f72"/><stop offset=".48" stop-color="#030b28"/><stop offset="1" stop-color="#020617"/></linearGradient>
+ <linearGradient id="glow" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#00f6ff"/><stop offset=".55" stop-color="#167dff"/><stop offset="1" stop-color="#ff24c8"/></linearGradient>
+ <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feGaussianBlur stdDeviation="8"/></filter>
+</defs>
+<path d="M45 220C94 84 209 42 330 70c73 17 119 4 151-30-8 73-55 117-127 129-97 17-173-19-249 57C69 259 46 291 30 329" fill="none" stroke="url(#shell)" stroke-width="22" stroke-linecap="round" opacity=".9"/>
+<path d="M482 115c-39 79-105 107-174 98-79-11-128-8-182 52" fill="none" stroke="url(#glow)" stroke-width="13" stroke-linecap="round"/>
+<path d="M176 188q80-88 160 0M199 211q57-62 114 0M222 234q34-36 68 0" fill="none" stroke="url(#glow)" stroke-width="17" stroke-linecap="round"/>
+<circle cx="256" cy="260" r="12" fill="#00eaff"/>
+<g stroke="#06132e" stroke-width="10" stroke-linejoin="round">
+ <path d="M93 309l16-119 22-17 21 18 18 118M342 309l18-118 22-18 21 18 17 118" fill="none" stroke="url(#shell)" stroke-width="17"/>
+ <path d="M74 320l47-36h270l47 36-22 66H96z" fill="url(#face)"/>
+ <path d="M94 320l75-24h174l75 24-41 24H135z" fill="url(#shell)"/>
+ <path d="M101 349h310l-17 28H118z" fill="#06122f"/>
+</g>
+<g fill="none" stroke="#00eaff" stroke-width="6" stroke-linecap="round">
+ <path d="M180 346v-17m-10 8a10 10 0 1 0 20 0"/>
+ <path d="M229 340q14-14 28 0m-21 10q7-7 14 0"/>
+ <circle cx="296" cy="344" r="11"/><path d="M285 344h22m-11-11v22"/>
+ <path d="M346 355l12-21 12 21m-24 0h24"/>
+</g>
+<path d="M74 393h364" stroke="url(#glow)" stroke-width="5" stroke-linecap="round"/>
+</svg>
