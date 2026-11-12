@@ -746,7 +746,253 @@ input,select { max-width:100%; }
 
 /* Keep the app and its navigation hidden until the user completes the welcome flow. */
 #app[hidden] { display: none !important; }
+
+/* RouterMate UI-only redesign v3 — original markup, IDs, data flow and router actions retained. */
+:root {
+  color-scheme: light;
+  --bg:#f4f8fc; --surface:#ffffff; --surface-2:#edf4fa; --line:#dce7f0;
+  --glow1:rgba(30,169,220,.13); --glow2:rgba(75,112,235,.10); --glow3:rgba(37,190,169,.08);
+  --fg:#142b40; --muted:#647b90; --accent:#078fbd; --accent-ink:#ffffff; --accent-soft:#e1f5fb;
+  --good:#168653; --good-soft:#e4f6ec; --warn:#a76b08; --warn-soft:#fff4dc;
+  --bad:#c7475c; --bad-soft:#ffeaed;
+}
+html { background:var(--bg) !important; }
+body {
+  color:var(--fg) !important;
+  background:radial-gradient(900px 520px at 0% -8%,var(--glow1),transparent 62%),radial-gradient(760px 480px at 100% 0%,var(--glow2),transparent 60%),radial-gradient(900px 560px at 50% 110%,var(--glow3),transparent 62%),var(--bg) !important;
+  background-attachment:fixed !important;
+}
+.rail { background:rgba(255,255,255,.88) !important; border-color:var(--line) !important; box-shadow:0 14px 42px rgba(31,67,99,.09),inset 0 1px rgba(255,255,255,.9) !important; }
+.brand b { color:#16334b !important; }
+.brand small { color:var(--muted) !important; }
+.nav a { color:#60788e !important; }
+.nav a:hover { color:#12344d !important; background:#edf7fb !important; }
+.nav a[aria-current="page"] { color:#087fa8 !important; background:linear-gradient(100deg,#e2f6fb,#f3fbfe) !important; border-color:#c7eaf4 !important; box-shadow:inset 3px 0 #13a9d5,0 5px 18px rgba(17,145,188,.06) !important; }
+h1,.panel h2 { color:#18344b !important; }
+.sub,.hint,.tile .k,.dev .use,.dev .meta { color:var(--muted) !important; }
+.panel,.tile,.dev,.netcard,.hcard,.login-card {
+  color:var(--fg) !important; background:rgba(255,255,255,.94) !important;
+  border:1px solid var(--line) !important; border-radius:18px !important;
+  box-shadow:0 10px 30px rgba(34,72,105,.07),inset 0 1px rgba(255,255,255,.95) !important;
+}
+.panel { padding:19px !important; }
+.tile { background:linear-gradient(145deg,#fff,#f7fbfe) !important; }
+.tile .v { color:#173b55 !important; }
+.tile .ti { background:#e4f5fb !important; color:#078fbd !important; box-shadow:none !important; }
+.tile .ti.c2 { background:#ffedf0 !important; color:#c7475c !important; }
+.tile .ti.c3 { background:#eeeaff !important; color:#7660ce !important; }
+.btn { color:#34536b !important; background:#fff !important; border:1px solid #d6e4ed !important; box-shadow:0 2px 5px rgba(28,65,95,.035) !important; }
+.btn:hover { color:#087fa8 !important; background:#f0f9fc !important; border-color:#a8ddeb !important; }
+.btn.primary { color:#fff !important; background:linear-gradient(120deg,#0da8cf,#287de0) !important; border-color:#149fce !important; box-shadow:0 7px 18px rgba(23,145,196,.2) !important; }
+.btn.primary:hover { background:linear-gradient(120deg,#18b8dc,#368bf0) !important; color:#fff !important; }
+.btn.danger { color:#c7475c !important; background:#fff7f8 !important; border-color:#f0cbd2 !important; }
+.chip { color:#5d758a !important; background:#f6fafc !important; border-color:#dce7f0 !important; }
+.chip:hover { color:#087fa8 !important; background:#eff9fc !important; }
+.chip[aria-pressed="true"] { color:#087fa8 !important; background:#e1f5fb !important; border-color:#a9deed !important; box-shadow:inset 0 0 0 1px rgba(8,143,189,.04) !important; }
+input[type="text"],input[type="password"],input[type="tel"],input[type="url"],input[type="number"],select,.search,.rt-select {
+  color:#18364d !important; background:#f9fcfe !important; border-color:#d4e3ed !important; box-shadow:inset 0 1px 2px rgba(30,65,95,.025) !important;
+}
+input::placeholder { color:#91a4b4 !important; }
+.field label { color:#526d82 !important; }
+.net.hero { background:radial-gradient(420px 200px at 100% 0%,rgba(29,177,218,.12),transparent 68%),linear-gradient(120deg,#e9f8fc,#f7fbff 72%) !important; border-color:#c7eaf4 !important; }
+.net .net-head,.net.hero .net-head { color:#173b55 !important; }
+.net .hint { color:#617b90 !important; }
+.rd { border-color:#e4edf3 !important; }
+.rd-i { color:#078fbd !important; background:#e4f5fb !important; box-shadow:none !important; }
+.rd-n { color:#25465f !important; }
+.rd-n small { color:#68849a !important; }
+.rd-s { color:#168653 !important; }
+.dev .name { color:#193950 !important; }
+.dev .ico { color:#078fbd !important; background:#e4f5fb !important; }
+.dev.blocked { background:#fff7f8 !important; border-color:#f2d3d9 !important; }
+.dev.blocked .ico { color:#c7475c !important; background:#ffeaed !important; }
+.dev .use b { color:#087fa8 !important; }
+.kv dt { color:#647b90 !important; }
+.kv dd { color:#18364d !important; }
+#chat-log { background:#f7fbfe !important; border-color:#e0eaf1 !important; }
+.msg.me { background:linear-gradient(120deg,#159fc7,#347fdf) !important; color:#fff !important; }
+.msg.ai { color:#294a62 !important; background:#edf5fa !important; border-color:#dce8f0 !important; }
+.ai-gear { color:#087fa8 !important; background:#eaf8fc !important; border-color:#c9eaf3 !important; }
+.bio-card { color:#193950 !important; background:linear-gradient(145deg,#effaff,#f6f8ff) !important; border-color:#c9eaf3 !important; box-shadow:0 12px 30px rgba(34,72,105,.08) !important; }
+.bio-card h2 { color:#193950 !important; }
+.bio-tg { color:#087fa8 !important; background:#e7f6fb !important; border-color:#c6e8f1 !important; }
+.bio-tg[aria-pressed=true] { color:#fff !important; background:linear-gradient(90deg,#078fbd,#287de0) !important; }
+.netcard { background:#fff !important; }
+.netcard .nr { border-color:#e5edf3 !important; }
+#ni-btn,.help-fab { color:#087fa8 !important; background:rgba(255,255,255,.96) !important; border-color:#cfe5ef !important; box-shadow:0 6px 18px rgba(31,67,99,.12) !important; }
+.hcard { color:#18364d !important; background:#fff !important; border-color:#dce7f0 !important; }
+.hrow { border-color:#e2ebf2 !important; }
+.toast { color:#fff !important; background:#18364d !important; border-color:#c5e5ef !important; }
+.ptr { color:#18364d !important; background:#fff !important; border-color:#dce7f0 !important; }
+.wifi-bar { color:#fff !important; }
+.login-card { background:linear-gradient(145deg,#fff,#f4faff) !important; }
+.login-card p,.secure { color:var(--muted) !important; }
+.login-err { color:#c7475c !important; }
+.welcome-card { color:#18364d !important; background:rgba(255,255,255,.94) !important; border-color:#dce7f0 !important; box-shadow:0 18px 55px rgba(31,67,99,.13) !important; }
+.welcome-card p { color:var(--muted) !important; }
+.holo { opacity:.35 !important; }
+#theme-toggle { min-width:40px; display:inline-flex; align-items:center; justify-content:center; gap:7px; }
+#theme-toggle svg { width:17px; height:17px; }
+:focus-visible { outline-color:#078fbd !important; }
+
+:root[data-theme="dark"] {
+  color-scheme:dark;
+  --bg:#071321; --surface:#102238; --surface-2:#172e46; --line:rgba(123,177,211,.2);
+  --glow1:rgba(0,196,255,.15); --glow2:rgba(67,93,235,.15); --glow3:rgba(0,210,180,.08);
+  --fg:#eaf6ff; --muted:#94aec2; --accent:#45c7e8; --accent-ink:#041723; --accent-soft:rgba(69,199,232,.14);
+  --good:#43dba3; --good-soft:rgba(67,219,163,.13); --warn:#ffc66d; --warn-soft:rgba(255,198,109,.13); --bad:#ff8194; --bad-soft:rgba(255,129,148,.13);
+}
+:root[data-theme="dark"] body { background:radial-gradient(700px 420px at 0% -6%,rgba(20,130,180,.25),transparent 62%),radial-gradient(600px 400px at 100% 0%,rgba(49,67,180,.22),transparent 60%),linear-gradient(160deg,#071321,#0a1b2d 55%,#071321) !important; }
+:root[data-theme="dark"] .rail { background:rgba(8,22,38,.9) !important; }
+:root[data-theme="dark"] .brand b,:root[data-theme="dark"] h1,:root[data-theme="dark"] .panel h2 { color:#f0f8ff !important; }
+:root[data-theme="dark"] .brand small,:root[data-theme="dark"] .nav a { color:#9bb5c9 !important; }
+:root[data-theme="dark"] .nav a:hover { color:#eaf8ff !important; background:rgba(39,199,245,.07) !important; }
+:root[data-theme="dark"] .nav a[aria-current="page"] { color:#7de6ff !important; background:linear-gradient(100deg,rgba(39,199,245,.18),rgba(39,199,245,.045)) !important; border-color:rgba(39,199,245,.27) !important; }
+:root[data-theme="dark"] .panel,:root[data-theme="dark"] .tile,:root[data-theme="dark"] .dev,:root[data-theme="dark"] .netcard,:root[data-theme="dark"] .hcard,:root[data-theme="dark"] .login-card { color:#eaf6ff !important; background:linear-gradient(145deg,rgba(17,39,62,.97),rgba(10,27,45,.97)) !important; border-color:var(--line) !important; box-shadow:0 12px 30px rgba(0,0,0,.2),inset 0 1px rgba(255,255,255,.025) !important; }
+:root[data-theme="dark"] .tile .v,:root[data-theme="dark"] .dev .name,:root[data-theme="dark"] .kv dd { color:#f1f9ff !important; }
+:root[data-theme="dark"] .tile .ti,:root[data-theme="dark"] .dev .ico,:root[data-theme="dark"] .rd-i { color:#61ddff !important; background:rgba(39,199,245,.12) !important; }
+:root[data-theme="dark"] .btn { color:#d9efff !important; background:rgba(17,39,61,.9) !important; border-color:rgba(112,175,211,.23) !important; }
+:root[data-theme="dark"] .btn:hover { background:rgba(28,60,87,.96) !important; }
+:root[data-theme="dark"] .btn.primary { color:#031421 !important; background:linear-gradient(115deg,#32d5f5,#3c9dff) !important; border-color:#27c7f5 !important; }
+:root[data-theme="dark"] .chip { color:#a9c1d4 !important; background:rgba(11,28,46,.92) !important; border-color:rgba(112,175,211,.2) !important; }
+:root[data-theme="dark"] .chip[aria-pressed="true"] { color:#75e5ff !important; background:rgba(39,199,245,.15) !important; border-color:rgba(39,199,245,.5) !important; }
+:root[data-theme="dark"] input[type="text"],:root[data-theme="dark"] input[type="password"],:root[data-theme="dark"] input[type="tel"],:root[data-theme="dark"] input[type="url"],:root[data-theme="dark"] input[type="number"],:root[data-theme="dark"] select,:root[data-theme="dark"] .search,:root[data-theme="dark"] .rt-select { color:#eaf6ff !important; background:#081727 !important; border-color:rgba(112,175,211,.24) !important; }
+:root[data-theme="dark"] .field label,:root[data-theme="dark"] .kv dt { color:#a9c1d4 !important; }
+:root[data-theme="dark"] .net.hero { background:radial-gradient(420px 200px at 100% 0%,rgba(39,199,245,.17),transparent 68%),linear-gradient(120deg,#102c45,#0b1b2d 72%) !important; }
+:root[data-theme="dark"] .net .net-head { color:#effaff !important; }
+:root[data-theme="dark"] #chat-log { background:rgba(4,16,29,.65) !important; }
+:root[data-theme="dark"] .msg.ai { color:#eaf6ff !important; background:rgba(25,53,77,.88) !important; border-color:rgba(103,178,218,.2) !important; }
+:root[data-theme="dark"] .bio-card { color:#eaf6ff !important; background:linear-gradient(145deg,#102c46,#0b1b2e) !important; }
+:root[data-theme="dark"] .bio-card h2 { color:#eafaff !important; }
+:root[data-theme="dark"] #ni-btn,:root[data-theme="dark"] .help-fab { color:#bdefff !important; background:rgba(8,25,42,.94) !important; border-color:rgba(39,199,245,.32) !important; }
+:root[data-theme="dark"] .welcome-card { color:#eaf6ff !important; background:rgba(10,28,64,.88) !important; border-color:var(--line) !important; }
+:root[data-theme="dark"] .welcome-card p { color:var(--muted) !important; }
+:root[data-theme="dark"] .secure { color:#80a6bd !important; }
+:root[data-theme="dark"] .hcard { background:rgba(8,24,40,.98) !important; }
+:root[data-theme="dark"] .toast { background:#102b42 !important; color:#eaf8ff !important; }
+@media (max-width:760px) {
+  :root[data-theme="dark"] .nav { background:rgba(7,20,34,.97) !important; border-color:rgba(116,193,225,.25) !important; }
+  :root:not([data-theme="dark"]) .nav { background:rgba(255,255,255,.96) !important; border:1px solid #dce7f0 !important; box-shadow:0 10px 28px rgba(31,67,99,.14) !important; }
+}
+
+/* RouterMate logo + separated welcome/auth stages */
+.rm-lockup{display:flex;align-items:center;justify-content:center;gap:12px;min-height:58px}
+.rm-mark{width:54px;height:54px;flex:none;filter:drop-shadow(0 5px 12px rgba(27,135,210,.18))}
+.rm-word{font-family:var(--font-display);font-size:clamp(27px,6vw,36px);font-weight:700;letter-spacing:-1.5px;color:var(--fg);line-height:1}
+.rm-word span{color:var(--accent)}
+.welcome-card .rm-lockup{margin-bottom:2px}
+.login-card .rm-lockup{justify-content:flex-start;margin-bottom:4px}
+#login[hidden],#setup[hidden],#welcome[hidden],#app[hidden]{display:none!important}
+#login:not([hidden]),#setup:not([hidden]),#welcome:not([hidden]){display:block;min-height:calc(100vh - 32px)}
+#login:not([hidden]) .login,#setup:not([hidden]) .login{min-height:calc(100vh - 90px);display:grid;place-items:center;padding:24px 0}
+
+.login-router-art{display:flex;justify-content:center;margin:8px auto 0;opacity:.9}.login-router-art svg{height:auto;max-height:120px}
 </style>
+
+<style id="routermate-premium-final">
+/* Premium Light UI: visual-only overrides; original IDs, markup, and app logic stay intact. */
+:root[data-theme="light"]{
+ color-scheme:light!important;
+ --bg:#f4f8fc!important;--surface:#ffffff!important;--surface-2:#edf4fa!important;--line:#dce7f0!important;
+ --fg:#173047!important;--muted:#6c8295!important;--accent:#078fbd!important;--accent-ink:#fff!important;--accent-soft:#e2f6fb!important;
+ --good:#168653!important;--good-soft:#e4f6ec!important;--warn:#a76b08!important;--warn-soft:#fff4dc!important;--bad:#c7475c!important;--bad-soft:#ffeaed!important;
+ --glow1:rgba(27,166,216,.13)!important;--glow2:rgba(71,112,229,.09)!important;--glow3:rgba(29,184,160,.07)!important;
+}
+:root[data-theme="light"] body{
+ background:radial-gradient(850px 430px at 0% 0%,rgba(34,180,218,.13),transparent 64%),radial-gradient(760px 420px at 100% 0%,rgba(81,119,230,.09),transparent 62%),#f4f8fc!important;
+ color:#173047!important;padding:20px 20px 100px!important;font-family:"IBM Plex Sans","Noto Sans Bengali",system-ui,sans-serif!important;
+}
+:root[data-theme="light"] .app{max-width:1240px!important;grid-template-columns:228px minmax(0,1fr)!important;gap:26px!important}
+:root[data-theme="light"] .rail{position:sticky!important;top:18px!important;gap:22px!important;padding:20px 14px!important;background:rgba(255,255,255,.9)!important;border:1px solid #e0eaf2!important;border-radius:22px!important;box-shadow:0 12px 34px rgba(35,75,110,.08)!important;min-height:calc(100vh - 40px)!important}
+:root[data-theme="light"] .rail .brand{display:flex!important;padding:4px 8px 18px!important;border-bottom:1px solid #e8eff5!important}
+:root[data-theme="light"] .brand img{width:42px!important;height:42px!important;object-fit:contain!important}
+:root[data-theme="light"] .brand b{color:#18364d!important;font-size:21px!important}
+:root[data-theme="light"] .brand b i{color:#078fbd!important}
+:root[data-theme="light"] .brand small{color:#7b91a4!important;letter-spacing:.13em!important}
+:root[data-theme="light"] .nav{gap:7px!important}
+:root[data-theme="light"] .nav a{min-height:48px!important;padding:10px 13px!important;border:1px solid transparent!important;border-radius:13px!important;color:#61798d!important;font-weight:600!important}
+:root[data-theme="light"] .nav a svg{width:19px!important;height:19px!important}
+:root[data-theme="light"] .nav a:hover{background:#f0f7fb!important;color:#17627f!important}
+:root[data-theme="light"] .nav a[aria-current="page"]{background:linear-gradient(100deg,#e2f6fb,#edf4ff)!important;color:#087fa8!important;border-color:#cdebf4!important;box-shadow:inset 3px 0 #0b9fc9!important}
+:root[data-theme="light"] .main{gap:18px!important}
+:root[data-theme="light"] .top{padding:18px 21px!important;background:rgba(255,255,255,.88)!important;border:1px solid #e0eaf2!important;border-radius:20px!important;box-shadow:0 9px 28px rgba(35,75,110,.06)!important}
+:root[data-theme="light"] h1{font-size:27px!important;letter-spacing:-.6px!important;color:#18364d!important}
+:root[data-theme="light"] .sub{color:#7890a3!important;font-size:13px!important}
+:root[data-theme="light"] .top-actions{gap:9px!important}
+:root[data-theme="light"] .panel,:root[data-theme="light"] .tile,:root[data-theme="light"] .dev,:root[data-theme="light"] .login-card,:root[data-theme="light"] .netcard,:root[data-theme="light"] .hcard{
+ background:#fff!important;color:#173047!important;border:1px solid #e0eaf2!important;border-radius:18px!important;
+ box-shadow:0 8px 24px rgba(35,75,110,.055)!important;backdrop-filter:none!important;
+}
+:root[data-theme="light"] .panel{padding:19px!important}
+:root[data-theme="light"] .panel h2{font-size:16px!important;color:#23445c!important;margin-bottom:14px!important}
+:root[data-theme="light"] .tiles{gap:13px!important}
+:root[data-theme="light"] .tile{min-height:116px!important;padding:17px!important;display:flex!important;flex-direction:row!important;align-items:center!important;gap:13px!important}
+:root[data-theme="light"] .tile .ti{width:44px!important;height:44px!important;border-radius:14px!important;box-shadow:none!important}
+:root[data-theme="light"] .tile .ti.c1{background:#e4f5fb!important;color:#078fbd!important}
+:root[data-theme="light"] .tile .ti.c2{background:#ffedf0!important;color:#d65b70!important}
+:root[data-theme="light"] .tile .ti.c3{background:#e9f7f1!important;color:#168653!important}
+:root[data-theme="light"] .tile .k{color:#6c8295!important;font-size:12px!important;font-weight:600!important}
+:root[data-theme="light"] .tile .v{font-size:29px!important;color:#18364d!important;margin-top:3px!important}
+:root[data-theme="light"] .btn{min-height:42px!important;border-radius:12px!important;background:#fff!important;color:#36566d!important;border:1px solid #dce7f0!important;box-shadow:none!important;font-weight:600!important}
+:root[data-theme="light"] .btn:hover{background:#f3f9fc!important}
+:root[data-theme="light"] .btn.primary{color:#fff!important;background:linear-gradient(110deg,#078fbd,#287de0)!important;border-color:#078fbd!important;box-shadow:0 6px 15px rgba(7,143,189,.18)!important}
+:root[data-theme="light"] .btn.danger{color:#c7475c!important;background:#fff!important;border-color:#f0cbd2!important}
+:root[data-theme="light"] .chip{background:#fff!important;color:#71879a!important;border:1px solid #dce7f0!important;border-radius:999px!important;padding:7px 14px!important;font-weight:600!important}
+:root[data-theme="light"] .chip[aria-pressed="true"]{background:#e5f6fb!important;color:#087fa8!important;border-color:#bfe6f1!important;box-shadow:none!important}
+:root[data-theme="light"] input[type="text"],:root[data-theme="light"] input[type="password"],:root[data-theme="light"] input[type="tel"],:root[data-theme="light"] input[type="url"],:root[data-theme="light"] input[type="number"],:root[data-theme="light"] select,:root[data-theme="light"] .search,:root[data-theme="light"] .rt-select{
+ background:#fbfdff!important;color:#173047!important;border:1px solid #dce7f0!important;border-radius:11px!important;min-height:44px!important;padding:9px 12px!important;
+}
+:root[data-theme="light"] .field label{color:#526d82!important}
+:root[data-theme="light"] .dev{padding:14px 16px!important;gap:10px 14px!important}
+:root[data-theme="light"] .dev .ico{width:46px!important;height:46px!important;border-radius:14px!important;background:#e7f6fb!important;color:#078fbd!important}
+:root[data-theme="light"] .dev .name{color:#23445c!important}
+:root[data-theme="light"] .dev .meta,:root[data-theme="light"] .dev .use{color:#71879a!important}
+:root[data-theme="light"] .dev .use b{color:#23445c!important}
+:root[data-theme="light"] .pill.good{background:#e6f7ee!important;color:#168653!important;border:1px solid #ccebd9!important;box-shadow:none!important}
+:root[data-theme="light"] .pill.bad{background:#ffedf0!important;color:#c7475c!important}
+:root[data-theme="light"] .pill.warn{background:#fff5df!important;color:#a76b08!important}
+:root[data-theme="light"] .grp{color:#23445c!important}
+:root[data-theme="light"] .toolbar{gap:12px!important}
+:root[data-theme="light"] .chatbox{padding:18px!important}
+:root[data-theme="light"] #chat-log{border-radius:14px!important}
+:root[data-theme="light"] .msg.ai{background:#eff7fb!important;color:#294a62!important;border:1px solid #deebf2!important}
+:root[data-theme="light"] .msg.me{background:linear-gradient(110deg,#078fbd,#287de0)!important;color:#fff!important}
+:root[data-theme="light"] .bio-card{background:linear-gradient(145deg,#f0fbff,#f7f9ff)!important;border-color:#cfeaf3!important}
+:root[data-theme="light"] .welcome-screen{min-height:calc(100vh - 40px)!important;padding:24px!important}
+:root[data-theme="light"] .welcome-card{max-width:430px!important;padding:42px 30px!important;gap:24px!important;background:rgba(255,255,255,.96)!important;border:1px solid #dceaf2!important;border-radius:26px!important;box-shadow:0 22px 65px rgba(31,76,112,.13)!important;color:#18364d!important}
+:root[data-theme="light"] .welcome-card p{color:#71879a!important;font-size:15px!important}
+:root[data-theme="light"] .welcome-signup{max-width:100%!important;min-height:52px!important;border-radius:14px!important;font-size:16px!important}
+:root[data-theme="light"] .login{padding-top:2vh!important}
+:root[data-theme="light"] .login-card{max-width:420px!important;padding:28px!important;border-radius:22px!important;gap:18px!important}
+:root[data-theme="light"] .login-card h1{font-size:23px!important}
+:root[data-theme="light"] .login-card p,:root[data-theme="light"] .secure{color:#71879a!important}
+:root[data-theme="light"] .holo{opacity:.12!important;pointer-events:none!important}
+:root[data-theme="light"] .toast{background:#18364d!important;color:#fff!important;border-radius:12px!important}
+:root[data-theme="light"] .ptr{background:#fff!important;color:#18364d!important;border-color:#dce7f0!important}
+:root[data-theme="light"] #theme-toggle{background:#edf7fb!important;color:#087fa8!important;border-color:#cceaf3!important}
+@media(max-width:760px){
+ :root[data-theme="light"] body{padding:12px 12px 96px!important}
+ :root[data-theme="light"] .app{grid-template-columns:minmax(0,1fr)!important;gap:14px!important}
+ :root[data-theme="light"] .rail{position:static!important;min-height:0!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+ :root[data-theme="light"] .rail .brand{display:flex!important;padding:7px 5px 11px!important;border:0!important}
+ :root[data-theme="light"] .rail .brand img{width:36px!important;height:36px!important}
+ :root[data-theme="light"] .rail .brand b{font-size:20px!important}
+ :root[data-theme="light"] .nav{position:fixed!important;left:12px!important;right:12px!important;bottom:10px!important;z-index:50!important;display:flex!important;flex-direction:row!important;gap:3px!important;padding:7px!important;background:rgba(255,255,255,.97)!important;border:1px solid #dce7f0!important;border-radius:18px!important;box-shadow:0 12px 35px rgba(27,65,98,.18)!important;backdrop-filter:blur(18px)!important}
+ :root[data-theme="light"] .nav a{flex:1!important;min-width:0!important;min-height:54px!important;padding:6px 2px!important;gap:3px!important;font-size:10px!important;border-radius:12px!important}
+ :root[data-theme="light"] .nav a svg{width:19px!important;height:19px!important}
+ :root[data-theme="light"] .top{padding:15px!important;border-radius:17px!important;align-items:flex-start!important}
+ :root[data-theme="light"] h1{font-size:22px!important}
+ :root[data-theme="light"] .tiles{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ :root[data-theme="light"] .tile{min-height:98px!important;padding:12px!important;gap:9px!important}
+ :root[data-theme="light"] .tile .ti{width:36px!important;height:36px!important;border-radius:11px!important}
+ :root[data-theme="light"] .tile .v{font-size:24px!important}
+ :root[data-theme="light"] .panel{padding:15px!important;border-radius:16px!important}
+ :root[data-theme="light"] .dev{grid-template-columns:40px minmax(0,1fr)!important;padding:12px!important}
+ :root[data-theme="light"] .dev .use,:root[data-theme="light"] .dev .acts{grid-column:1/-1!important}
+ :root[data-theme="light"] .dev .acts{justify-content:flex-start!important}
+}
+</style>
+
 </head>
 <body>
 
@@ -761,7 +1007,7 @@ input,select { max-width:100%; }
 </div></div>
 <section id="welcome" class="welcome-screen">
   <div class="welcome-card">
-    <div class="lockup"><img src="img/routermate-lockup.svg" alt="RouterMate"></div>
+    <div class="rm-lockup" role="img" aria-label="RouterMate"><svg class="rm-mark" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="rmGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16b9e8"/><stop offset="1" stop-color="#3867ed"/></linearGradient></defs><rect x="3" y="3" width="58" height="58" rx="18" fill="url(#rmGrad)"/><path d="M15 26c9-9 25-9 34 0M21 33c6-6 16-6 22 0M27 40c3-3 7-3 10 0" fill="none" stroke="white" stroke-width="3.6" stroke-linecap="round"/><circle cx="32" cy="47" r="2.8" fill="white"/></svg><span class="rm-word">Router<span>Mate</span></span></div>
     <p>Smart Wi-Fi Management</p>
     <button class="btn primary welcome-signup" type="button" id="welcome-signup">Sign Up</button>
   </div>
@@ -770,7 +1016,7 @@ input,select { max-width:100%; }
   <div class="login-top"><button class="btn sm" type="button" data-lang-toggle></button></div>
   <div class="login">
     <form class="login-card" id="setup-form" autocomplete="off">
-      <div class="lockup"><img src="img/routermate-lockup.svg" alt="RouterMate"></div>
+      <div class="rm-lockup" role="img" aria-label="RouterMate"><svg class="rm-mark" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="rmGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16b9e8"/><stop offset="1" stop-color="#3867ed"/></linearGradient></defs><rect x="3" y="3" width="58" height="58" rx="18" fill="url(#rmGrad)"/><path d="M15 26c9-9 25-9 34 0M21 33c6-6 16-6 22 0M27 40c3-3 7-3 10 0" fill="none" stroke="white" stroke-width="3.6" stroke-linecap="round"/><circle cx="32" cy="47" r="2.8" fill="white"/></svg><span class="rm-word">Router<span>Mate</span></span></div>
       <div><h1 data-i18n="setup_title"></h1><p data-i18n="setup_sub"></p></div>
       <div class="field"><label for="s-type" data-i18n="a_type"></label><select id="s-type" class="rt-select"><option value="auto" data-i18n="s_auto"></option><option value="ac5">Tenda AC5</option><option value="f3">Tenda F3</option><option value="netis">Netis</option></select></div>
       <div class="field"><label for="s-url" data-i18n="s_url"></label><input id="s-url" type="text" value="http://192.168.1.1" inputmode="url" autocapitalize="off"></div>
@@ -784,11 +1030,11 @@ input,select { max-width:100%; }
   </div>
 </section>
 
-<section id="login">
+<section id="login" hidden>
   <div class="login-top"><button class="btn sm" type="button" data-lang-toggle></button></div>
   <div class="login">
     <form class="login-card" id="login-form">
-      <div class="lockup"><img src="img/routermate-lockup.svg" alt="RouterMate"></div>
+      <div class="rm-lockup" role="img" aria-label="RouterMate"><svg class="rm-mark" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="rmGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16b9e8"/><stop offset="1" stop-color="#3867ed"/></linearGradient></defs><rect x="3" y="3" width="58" height="58" rx="18" fill="url(#rmGrad)"/><path d="M15 26c9-9 25-9 34 0M21 33c6-6 16-6 22 0M27 40c3-3 7-3 10 0" fill="none" stroke="white" stroke-width="3.6" stroke-linecap="round"/><circle cx="32" cy="47" r="2.8" fill="white"/></svg><span class="rm-word">Router<span>Mate</span></span></div>
       <div class="lh"><h1 data-i18n="login_h"></h1><p data-i18n="login_sub"></p></div>
       <div class="field"><label for="l-pass" data-i18n="l_pass"></label><input id="l-pass" type="password" autocomplete="current-password"></div>
       <div class="login-err" id="login-err" role="alert"></div>
@@ -799,7 +1045,7 @@ input,select { max-width:100%; }
     </form>
     <div class="secure"><span data-i18n="secure"></span></div>
   </div>
-  <img class="login-router" src="img/login-router.png" alt="">
+  <div class="login-router-art" aria-hidden="true"><svg viewBox="0 0 320 120" width="min(86%,340px)" role="presentation"><ellipse cx="160" cy="102" rx="112" ry="10" fill="#168fbd" opacity=".12"/><path d="M72 70Q72 58 84 54L236 54Q248 58 248 70L248 82Q248 90 236 93L84 93Q72 90 72 82Z" fill="#dcecf7" stroke="#7da9c5" stroke-width="2"/><path d="M102 54L94 18M218 54L226 18" stroke="#4d9bc5" stroke-width="4" stroke-linecap="round"/><path d="M132 70h56" stroke="#4d9bc5" stroke-width="3" stroke-linecap="round"/><circle cx="207" cy="76" r="4" fill="#18a879"/><circle cx="224" cy="76" r="4" fill="#18a879"/></svg></div>
 </section>
 
 <div class="app" id="app" hidden>
@@ -957,8 +1203,8 @@ input,select { max-width:100%; }
 <div class="ptr" id="ptr" aria-live="polite"></div>
 <div class="toast" id="toast" role="status" hidden></div>
 
-<script src="router-client.js"></script>
-<script src="ai-tools.js"></script>
+<script src="file:///android_asset/router-client.js"></script>
+<script src="file:///android_asset/ai-tools.js"></script>
 <script>
 (function () {
   var T = {
@@ -1710,7 +1956,7 @@ sa_title: "নিরাপত্তা পরামর্শ", sa_ok: "রাউ
   }
   installPasswordVisibility();
   applyStatic();
-  function showFirstScreen() { cfg = loadCfg(); renderBio(); var hasSetup = !!cfg; $("#welcome").hidden = hasSetup; $("#setup").hidden = true; $("#login").hidden = !hasSetup; $("#app").hidden = true; $("#help-first").hidden = true; $("#ni-wrap").hidden = true; if (hasSetup) renderBio(); }
+  function showFirstScreen() { cfg = loadCfg(); renderBio(); $("#welcome").hidden = false; $("#setup").hidden = true; $("#login").hidden = true; $("#app").hidden = true; $("#help-first").hidden = true; $("#ni-wrap").hidden = true; }
   $("#welcome-signup").addEventListener("click", function () { cfg = loadCfg(); $("#welcome").hidden = true; $("#setup").hidden = !!cfg; $("#login").hidden = !cfg; if (!cfg) requestSsidPermission(); else renderBio(); });
   var DEF_URL = { ac5: "http://192.168.1.1", f3: "http://192.168.0.1", netis: "http://192.168.1.1" };
   $("#s-type").addEventListener("change", function () { var u = $("#s-url"); if (Object.keys(DEF_URL).some(function (k) { return DEF_URL[k] === u.value.trim(); })) u.value = DEF_URL[this.value] || u.value; });
@@ -1907,5 +2153,34 @@ sa_title: "নিরাপত্তা পরামর্শ", sa_ok: "রাউ
 </script>
 
 
+<script>
+(function () {
+  var root = document.documentElement;
+  var saved = "light";
+  try { saved = localStorage.getItem("routermate-theme") === "dark" ? "dark" : "light"; } catch (e) {}
+  function applyTheme(mode) {
+    mode = mode === "dark" ? "dark" : "light";
+    root.setAttribute("data-theme", mode);
+    try { localStorage.setItem("routermate-theme", mode); } catch (e) {}
+    var b = document.getElementById("theme-toggle");
+    if (b) {
+      b.innerHTML = mode === "dark"
+        ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg><span>Light</span>'
+        : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></svg><span>Dark</span>';
+      b.setAttribute("aria-label", mode === "dark" ? "Switch to light theme" : "Switch to dark theme");
+      b.title = b.getAttribute("aria-label");
+    }
+  }
+  applyTheme(saved);
+  var actions = document.querySelector(".top-actions");
+  if (actions && !document.getElementById("theme-toggle")) {
+    var b = document.createElement("button");
+    b.type = "button"; b.id = "theme-toggle"; b.className = "btn";
+    b.addEventListener("click", function () { applyTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark"); });
+    actions.insertBefore(b, actions.firstChild);
+    applyTheme(saved);
+  }
+})();
+</script>
 </body>
 </html>
