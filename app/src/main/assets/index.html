@@ -998,3 +998,1084 @@ input::placeholder { color:#91a4b4 !important; }
 
     <section class="view" id="view-wifi" data-tab="net" hidden><div class="main">
       <div class="chips wtabs" id="wtabs"><button class="chip" type="button" data-wt="net" aria-pressed="true" data-i18n="wt_net"></button><button class="chip" type="button" data-wt="guest" aria-pressed="false" data-i18n="wt_guest"></button><button class="chip" type="button" data-wt="acl" aria-pressed="false" data-i18n="wt_acl"></button></div>
+      <div id="wifi-body"></div>
+      <div class="panel acl wb-acl">
+        <h2 data-i18n="acl_title"></h2>
+        <select id="acl-rt" class="rt-select" hidden></select>
+        <div class="chips" id="acl-mode">
+          <button class="chip" type="button" data-m="deny" aria-pressed="true" data-i18n="acl_black"></button>
+          <button class="chip" type="button" data-m="pass" aria-pressed="false" data-i18n="acl_white"></button>
+        </div>
+        <p class="hint" id="acl-hint"></p>
+        <div id="acl-list"></div>
+        <div class="acl-actions"><button class="btn primary" type="button" id="acl-save" data-i18n="acl_save"></button><span id="acl-msg" class="hint"></span></div>
+      </div>
+      <div id="wans" class="wb-net"></div>
+      <div class="notice wb-net" data-i18n="wifi_note"></div>
+    </div></section>
+
+    <section class="view" id="view-settings" hidden><div class="main">
+      <div class="panel" id="isp-panel">
+        <h2 data-i18n="isp_title"></h2>
+        <p class="hint" id="isp-num"></p>
+        <div class="isp-btns" id="isp-btns" hidden>
+          <button class="isp-b" type="button" id="isp-wa" data-i18n-title="isp_wa"><span class="isp-fb" data-i18n="isp_wa"></span></button>
+          <button class="isp-b" type="button" id="isp-call" data-i18n-title="isp_call"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></button>
+          <button class="isp-b" type="button" id="isp-bkash" data-i18n-title="isp_bkash"><span class="isp-fb" data-i18n="isp_bkash"></span></button>
+          <button class="isp-b" type="button" id="isp-imo" data-i18n-title="isp_imo"><span class="isp-fb" data-i18n="isp_imo"></span></button>
+        </div>
+        <div class="isp-acts"><button class="btn primary" type="button" id="isp-add" data-i18n="isp_add"></button></div>
+        <form id="isp-form" class="isp-form" autocomplete="off" hidden>
+          <div class="field"><label for="isp-name" data-i18n="isp_name"></label><input id="isp-name" type="text" maxlength="40"></div>
+          <div class="field"><label for="isp-in" data-i18n="isp_phone"></label><input id="isp-in" type="tel" inputmode="tel" placeholder="01XXXXXXXXX"></div>
+          <div class="login-err" id="isp-err" role="alert"></div>
+          <div class="isp-acts"><button class="btn primary" type="submit" data-i18n="isp_save"></button><button class="btn" type="button" id="isp-cancel" data-i18n="isp_cancel"></button><button class="btn" type="button" id="isp-del" data-i18n="isp_remove"></button></div>
+        </form>
+      </div>
+      <div class="panel">
+        <h2 data-i18n="set_lang"></h2>
+        <div class="chips" id="lang-set">
+          <button class="chip" type="button" data-lang-set="en" aria-pressed="true">English</button>
+          <button class="chip" type="button" data-lang-set="bn" aria-pressed="false">বাংলা</button>
+        </div>
+      </div>
+      <div class="panel">
+        <h2 data-i18n="set_routers"></h2>
+        <div id="router-list"></div>
+        <button class="btn primary" type="button" id="add-open" aria-expanded="false" style="margin-top:14px" data-i18n="add_router"></button>
+        <form id="add-form" autocomplete="off" hidden>
+          <div class="field"><label for="a-url" data-i18n="s_url"></label><input id="a-url" type="text" value="http://192.168.0.1" inputmode="url" autocapitalize="off"></div>
+          <div class="field"><label for="a-type" data-i18n="a_type"></label><select id="a-type" class="rt-select"><option value="auto" data-i18n="s_auto"></option><option value="f3">Tenda F3</option><option value="ac5">Tenda AC5</option><option value="netis">Netis</option></select></div>
+          <div class="field"><label for="a-pw" data-i18n="s_rpw"></label><input id="a-pw" type="password"></div>
+          <div class="login-err" id="add-err" role="alert"></div>
+          <button class="btn primary" type="submit" id="add-btn" data-i18n="add_btn"></button>
+        </form>
+      </div>
+      <div class="panel">
+        <h2 data-i18n="app_settings"></h2>
+        <button class="btn" id="reset-app" type="button" data-i18n="app_settings_btn"></button>
+      </div>
+      <div class="panel bio-card"><div class="bio-top"><svg viewBox="0 0 48 56" class="bio-shield" aria-hidden="true"><path d="M24 3 5 10v15c0 13 8 23 19 28 11-5 19-15 19-28V10z" fill="rgba(30,120,255,.25)" stroke="#39a0ff" stroke-width="2.5"/><rect x="16" y="24" width="16" height="13" rx="3" fill="#fff"/><path d="M19 24v-4a5 5 0 0 1 10 0v4" fill="none" stroke="#fff" stroke-width="2.6"/></svg><div><h2 data-i18n="bio_set_t"></h2><p class="hint" id="bio-hint"></p></div></div>
+        <div class="bio-mid"><div class="fp-box"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i><svg viewBox="0 0 100 100" class="fp-svg" aria-hidden="true"><g fill="none" stroke="#7fd0ff" stroke-width="2.6" stroke-linecap="round"><path d="M10 86 V46 a40 44 0 0 1 80 0 V86"/><path d="M16 90 V46 a34 38 0 0 1 68 0 V90" stroke-dasharray="70 8 40 1000"/><path d="M22 86 V46 a28 32 0 0 1 56 0 V86"/><path d="M28 92 V46 a22 26 0 0 1 44 0 V92" stroke-dasharray="60 10 50 1000"/><path d="M34 86 V46 a16 20 0 0 1 32 0 V86"/><path d="M40 80 V46 a10 14 0 0 1 20 0 V80"/><path d="M46 72 V46 a4 8 0 0 1 8 0 V72"/></g></svg><b class="fp-line"></b></div>
+          <button type="button" class="bio-tg" id="bio-tg" aria-pressed="false"><span id="bio-tgt"></span><i></i></button></div>
+        <div class="bio-foot"><svg viewBox="0 0 32 36" aria-hidden="true"><path d="M16 2 4 7v9c0 8 5 14 12 17 7-3 12-9 12-17V7z" fill="none" stroke="#39e0c8" stroke-width="2.4"/><path d="M10 17l4 4 8-9" fill="none" stroke="#39e0c8" stroke-width="2.6"/></svg><div><b data-i18n="bio_dev"></b><small data-i18n="bio_dev_s"></small></div></div>
+        <div class="chips" id="bio-chips" hidden><button class="chip" type="button" data-bio="1" aria-pressed="false" data-i18n="bio_on"></button><button class="chip" type="button" data-bio="0" aria-pressed="true" data-i18n="bio_off"></button></div></div>
+      <div class="panel">
+        <h2 data-i18n="pin_title"></h2><p class="hint" data-i18n="pin_help"></p>
+        <div class="field"><label for="pin-new" data-i18n="pin_label"></label><input id="pin-new" type="password" inputmode="numeric" maxlength="6" autocomplete="new-password"></div>
+        <div class="field"><label for="pin-confirm" data-i18n="pin_confirm"></label><input id="pin-confirm" type="password" inputmode="numeric" maxlength="6" autocomplete="new-password"></div>
+        <div class="acl-actions"><button class="btn primary" id="pin-save" type="button" data-i18n="pin_save"></button><button class="btn" id="pin-disable" type="button" data-i18n="pin_disable"></button><span class="hint" id="pin-status" role="status"></span></div>
+      </div>
+      <div class="panel about"><img src="img/routermate-icon.svg" alt=""><div><b data-i18n="about_t"></b><small data-i18n="about_s"></small></div></div>
+      <div class="panel">
+        <button class="btn danger" id="logout" type="button" data-i18n="logout"></button>
+      </div>
+    </div></section>
+
+    <section class="view" id="view-ai" hidden><div class="main">
+      <div class="ai-bar"><button type="button" class="ai-gear" id="ai-gear" hidden aria-label="AI backend">&#9881; <span data-i18n="aiset_t"></span></button></div>
+      <div class="panel" id="ai-cfg" hidden><h2 data-i18n="aiset_t"></h2><p class="hint" data-i18n="aiset_p"></p>
+        <div class="field"><label for="ai-url" data-i18n="aiset_url"></label><input id="ai-url" type="text" inputmode="url" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="https://routermate-ai.xxx.workers.dev"></div>
+        <div class="field"><label for="ai-token" data-i18n="aiset_tok"></label><input id="ai-token" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"></div>
+        <div class="acl-actions"><button class="btn primary" type="button" id="ai-save" data-i18n="acl_save"></button><button class="btn" type="button" id="ai-off" data-i18n="aiset_off"></button><span class="hint" id="ai-msg"></span></div></div>
+      <div class="chips wtabs" id="aitabs"><button class="chip" type="button" data-at="chat" aria-pressed="true" data-i18n="at_chat"></button><button class="chip" type="button" data-at="health" aria-pressed="false" data-i18n="at_health"></button><button class="chip" type="button" data-at="dev" aria-pressed="false" data-i18n="at_dev"></button><button class="chip" type="button" data-at="sec" aria-pressed="false" data-i18n="at_sec"></button></div>
+      <div id="ai-chat" class="ai-pane">
+        <div class="panel chatbox"><div id="chat-log" aria-live="polite"></div>
+          <div class="quick" id="chat-quick"></div>
+          <form id="chat-form" autocomplete="off"><input id="chat-in" type="text" data-i18n-ph="ai_ph" maxlength="400"><button class="btn primary" type="submit" id="chat-send" data-i18n="ai_send"></button></form>
+          <button class="btn sm" type="button" id="chat-clear" data-i18n="ai_clear"></button></div>
+      </div>
+      <div id="ai-health" class="ai-pane" hidden></div>
+      <div id="ai-dev" class="ai-pane" hidden></div>
+      <div id="ai-sec" class="ai-pane" hidden></div>
+    </div></section>
+
+    <section class="view" id="view-activity" hidden>
+      <div class="panel"><h2 data-i18n="recent"></h2><ul class="act-list" id="activity"></ul></div>
+    </section>
+  </main>
+</div>
+<div class="ptr" id="ptr" aria-live="polite"></div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script src="file:///android_asset/router-client.js"></script>
+<script src="file:///android_asset/ai-tools.js"></script>
+<script>
+(function () {
+  var T = {
+    en: {
+      brand: "RouterMate", isp_add: "Add ISP number", isp_edit: "Edit ISP number", isp_name: "ISP name (optional)", isp_phone: "ISP phone number", isp_save: "Save", isp_cancel: "Cancel", isp_remove: "Remove", isp_bad: "Enter a valid phone number, for example 01XXXXXXXXX.", isp_saved: "ISP number saved.", isp_none: "No ISP number yet. Add your ISP's number to call or message it from here.", help_title: "Help", help_sub: "Contact the developer", help_mail: "Gmail", help_wa: "WhatsApp", help_mail_open: "Send email", help_wa_open: "Open WhatsApp", help_copy: "Copy", help_copied: "Copied", help_close: "Close", s_auto: "Auto (find my router)", s_unk: "This router is not supported yet. Tap Copy test report and send it to the developer.", rep_copy: "Copy test report", rep_done: "Report copied", wb_off: "Wi-Fi is off. Tap to turn on your Wi-Fi", wb_no: "Not connected to Wi-Fi. Tap to open Wi-Fi settings", ni_title: "Your Wi-Fi", ni_conn: "Connected Wi-Fi", ni_off: "Not on Wi-Fi", ni_off_h: "Connect to your router's Wi-Fi first.", ni_ssid: "Wi-Fi", ni_permission: "Allow location permission to show the connected Wi-Fi name", ni_ip: "Device IP", ni_mask: "Subnet mask", ni_gw: "Router address", ni_dns: "Primary DNS", ni_link: "Link speed", ni_router: "Router", ni_use: "Use", ni_copy: "Copy", ni_copied: "Copied", ni_unk: "Not detected", ni_look: "Detecting…", ni_ref: "Refresh", ni_note: "Exact model shows after you log in.", bio_title: "Unlock RouterMate", bio_fp_title: "Unlock with fingerprint", bio_fp_btn: "Unlock with Fingerprint", bio_cancel: "Use app password or app PIN", bio_unlock: "Unlock with fingerprint", bio_set_t: "Fingerprint unlock", bio_dev: "Device fingerprint", bio_dev_s: "Uses your enrolled fingerprint", bio_set_p: "Use your enrolled fingerprint instead of typing your app password.", bio_on: "On", bio_off: "Off", bio_na: "No supported fingerprint is enrolled on this phone.", bio_enabled: "Biometric unlock is on.", bio_failed: "Biometric authentication was not confirmed.", pin_title: "Separate app PIN", pin_help: "Create a six-digit PIN for RouterMate. This is not your phone's screen-lock PIN.", pin_label: "RouterMate PIN (6 digits)", pin_confirm: "Confirm RouterMate PIN", pin_save: "Save PIN", pin_disable: "Remove app PIN", pin_unlock: "Unlock with app PIN", pin_bad: "Incorrect app PIN.", pin_match: "PINs must match and contain six digits.", pin_saved: "App PIN saved on this device.", pin_removed: "App PIN removed.", pin_missing: "Set an app PIN first in Security settings.", nav_ai: "AI", title_ai: "AI Assistant", at_chat: "Assistant", at_health: "Health", at_dev: "Devices", at_sec: "Security", ai_ph: "Ask or tell me what to do…", ai_send: "Send", ai_clear: "Clear chat", ai_think: "Thinking…", ai_hello: "Hi! I can show devices, explain slow WiFi, block/unblock, blacklist, limit or rename a device, and mark devices as known. Try one below.", ai_setup_t: "AI is not set up yet", ai_setup_p: "The chat needs your own AI backend (it keeps the Gemini key safe, outside the app). Health, Devices and Security tabs work without it. Add the backend link in Settings.", ai_goset: "Open Settings", q1: "Which device uses the most bandwidth?", q2: "Why is my WiFi slow?", q3: "Show blacklisted devices", q4: "Is anything unusual on my network?",
+aiset_t: "AI backend", aiset_p: "Link and token from your Cloudflare Worker. They are saved only on this phone. See ai-backend/README.md.", aiset_url: "Backend link", aiset_tok: "App token", aiset_off: "Remove", ai_saved: "Saved.", ai_removed: "Removed.",
+ae_auth: "The backend rejected the token. Check the app token in Settings.", ae_busy: "The AI is busy or the free limit is used up. Try again in a minute.", ae_backend: "The AI backend returned an error ({s}).", ae_net: "Could not reach the AI backend. Check the link and your internet.", ae_empty: "The AI gave no answer. Try again.", ae_many: "That took too many steps. Please ask in a simpler way.",
+ax_ok: "Done and confirmed by the router", ax_fail: "Not done", ax_read: "Checked router data", fn_block_device: "Block", fn_unblock_device: "Unblock", fn_blacklist_add: "Add to blacklist", fn_blacklist_remove: "Remove from blacklist", fn_set_speed_limit: "Speed limit", fn_rename_device: "Rename", fn_mark_known: "Mark known", fn_mark_unknown: "Mark unknown", fn_blacklist_show: "Access list", fn_list_devices: "Devices", fn_top_bandwidth: "Top bandwidth", fn_network_health: "Health",
+hp_score: "Network health", hp_insights: "AI Insights", hp_recs: "Smart Recommendations", hp_ask: "Ask AI to explain", ph_good: "Good", ph_fair: "Needs attention", ph_poor: "Problems found",
+h_good: "No problems found in the data the router shows.", h_net: "{r}: internet problem ({s}).", h_open: "{r}: WiFi has no password.", h_guest_open: "{r}: guest WiFi is on without a password.", h_crowd: "{r}: {n} devices are online.", h_24only: "{r}: only a 2.4 GHz WiFi is shown, so many devices share one band.", h_heavy: "{n} is using {p}% of the traffic right now.", h_unknown: "{n} online device(s) you have not marked as known: {names}.", h_limited: "{n} device(s) have a speed limit.", h_blocked: "{n} device(s) are blocked.",
+r_net: "Check the WAN cable, restart the ISP device, then call your ISP (Settings has the ISP buttons).", r_open: "Open the router page (globe button) and set a WPA2 WiFi password.", r_guest: "Turn off guest WiFi or give it a password on the router page.", r_crowd: "Limit heavy devices, block devices you do not know, and disconnect unused ones.", r_24: "If your router has a 5 GHz network, move capable phones and laptops to it.", r_heavy: "If it slows others, set a speed limit for that device (Devices page or ask the AI).", r_unknown: "Check them in the Devices tab. If you do not recognise one, block it and change the WiFi password.", r_good: "Keep the router password strong and change it now and then.", r_limited: "", r_blocked: "",
+di_title: "Device Intelligence", di_new: "New", di_known: "Known", di_markall: "Mark all online as known", di_none: "No devices.", di_me: "This phone", di_off: "Offline", di_blk: "Blocked", di_note: "Names come from the router. \"New\" means you have not marked it as known yet.",
+sa_title: "Security Advisor", sa_ok: "No security problem is visible in the data the router shows.", sa_tip1: "Whitelist mode lets only listed devices connect: WiFi page, Access List tab.", sa_tip2: "If an unknown device appears, block it and change the WiFi password on the router page.", sa_tip3: "Change the router admin password if you shared it.", sa_note: "The AI chat sends device names, IPs and speeds (not passwords or full MAC addresses) to Google Gemini through your backend.", wt_net: "WiFi Networks", wt_guest: "Guest Network", wt_acl: "Access List", recent_dev: "Recent Devices", connected: "Connected", router_status: "Router Status", about_t: "About RouterMate", about_s: "Version 1.0 · Your router's best friend", tagline: "YOUR ROUTER'S BEST FRIEND", rd_none: "No devices online.", more: "devices", login_h: "Router Admin Login", secure: "Secure Access", nav_overview: "Overview", nav_devices: "Devices", nav_wifi: "WiFi", nav_activity: "Activity", nav_settings: "Settings",
+      title_overview: "Overview", title_devices: "Devices", title_wifi: "WiFi", title_activity: "Activity", title_settings: "Settings", set_lang: "Language", set_router: "Router", t_guests: "Guest devices",
+      login_title: "Sign in", login_sub: "Enter your app password.", l_pass: "App password", login_btn: "Sign in",
+      login_bad: "Wrong password.", logout: "Log out", router_page: "Open router page", guest_pill: "Guest", guest_note: "Guest devices can only be viewed.", lang_btn: "বাংলা",
+      online: "Online", offline: "Offline", blocked: "Blocked", reconnecting: "Router not reachable", live: "Live",
+      t_online: "Online devices", t_down: "Download", t_up: "Upload", t_blocked: "Blocked",
+      chart_title: "Traffic, last 2 minutes", lg_down: "Download", lg_up: "Upload", ago: "2 min ago", nowl: "now",
+      top_title: "Fastest right now", none_active: "No device is using the internet right now.",
+      search_ph: "Search name, IP or MAC", f_all: "All", f_online: "Online", f_blocked: "Blocked", no_match: "No devices match.",
+      u_now: "Now", u_none: "No internet access", limit: "Limit", no_limit: "No limit", block: "Block", unblock: "Unblock", this_pc: "This computer",
+      ptr_pull: "Pull down to refresh", ptr_release: "Release to refresh", ptr_loading: "Refreshing…", isp_title: "ISP", isp_wa: "WhatsApp", isp_call: "Call", isp_bkash: "bKash", isp_imo: "IMO", isp_imo_copied: "Number copied. In IMO, search or paste the number.", isp_noimo: "IMO app not found. Opening its store page.", isp_copied: "Number copied. In bKash choose Send Money and paste it.", isp_nobkash: "bKash app not found. Opening its store page.", isp_nowa: "Could not open WhatsApp.", wan_title: "Internet details", via_pill: "You connect through this", grp_count: "{n} device(s)", set_routers: "Routers", a_type: "Router model", r_readonly: "View only", add_router: "Add another router", s_name: "Router name", add_btn: "Add router", r_open: "Open page", r_remove: "Remove", r_confirm: "Tap again to remove", r_ok: "Connected", r_active: "Active", r_inactive: "Inactive", r_activate: "Activate", r_deactivate: "Deactivate", r_none_active: "No active routers. Activate a router in Settings → Routers.", r_all: "All active routers", r_added: "Router added.", r_last: "At least one router must stay.", r_dup: "That router is already added.", e_start: "Connected to {r}", net_connecting: "Connecting…", nm_connecting: "The router is connecting to your ISP. Wait a minute.", net_ip_conflict: "IP conflict", nm_ip_conflict: "The router's LAN address conflicts with the ISP network. Change the LAN IP on the router page.", net_auth_failed: "ISP login failed", nm_auth_failed: "The ISP (PPPoE) user name or password was rejected. Check them on the router page.", net_ok: "Internet is working", net_unplugged: "WAN cable unplugged", net_no_ip: "No WAN address (cable unplugged or ISP problem)", net_no_internet: "No internet service", net_unknown: "Internet status unknown", nm_ok: "The router is online.", nm_unplugged: "The cable in the router's WAN (internet) port is unplugged or loose. Check the cable from your ISP.", nm_no_ip: "The router has no internet address. Either the WAN cable is unplugged, or the cable is connected but the ISP gives no address. Check the cable first, then restart the ISP device or call your ISP.", nm_no_internet: "The router has a connection but no internet. The ISP may have a problem.", n_ip: "WAN address", n_gw: "Gateway", n_type: "Connection", n_up: "Connected for", n_link: "Link speed", n_code: "Router code", e_net: "Internet: {s}", g_title: "Guest network", g_f3: "This router has no guest network.", g_devs: "Guest devices", g_none: "No guest devices connected.", g_for: "connected for", g_state: "Status", g_on: "On", g_off: "Off", g_open: "No password", g_pw: "Password protected", g_speed: "Speed limit", g_nolim: "No limit",
+      wifi_title: "WiFi networks", w_24: "2.4 GHz name", w_5: "5 GHz name", w_sec: "Security", w_pc: "Connected devices",
+      wifi_note: "Changing the WiFi name or password and restarting the router are not in this version yet. Use the router page for those.",
+      recent: "Recent events", e_block: "{n} was blocked", e_unblock: "{n} was unblocked", e_limit: "Limit for {n}: {l}", e_in: "{n} joined", e_ai: "AI: {n}", e_out: "{n} left",
+      s_dummy: "",
+      acl_title: "Access list", acl_black: "Blacklist", acl_white: "Whitelist", acl_hint_deny: "Blacklist: ticked devices are kept out of the WiFi. Everyone else can connect.", acl_hint_pass: "Whitelist: only ticked devices can use the WiFi. Everyone else is kept out.", acl_save: "Save", acl_confirm: "Tap again to apply", acl_you: "This phone", acl_saved: "Saved.", acl_loading: "Loading…", acl_empty: "No devices yet.", acl_off: "Not saved yet",
+      setup_title: "Set up", setup_sub: "Connect to your router once. Stay on your home WiFi.", s_url: "Router address", s_rpw: "Router admin password", s_apw: "New app password (6+ characters)", s_apw2: "Repeat app password", s_btn: "Save and connect", s_short: "App password needs at least 6 characters.", s_match: "The two app passwords do not match.", s_checking: "Connecting…", s_rbad: "The router did not accept that password.", app_settings: "App settings", app_settings_btn: "Change router or app password", app_settings_confirm: "Tap again to erase saved settings",
+      x_blocked: "{n} blocked", x_unblocked: "{n} can use the internet again", x_limit: "{n}: {l}", updated: "Updated", confirm_block: "Tap again to block", err_prefix: "Router problem: "
+    },
+    bn: {
+      brand: "RouterMate", isp_add: "ISP নম্বর যোগ করুন", isp_edit: "ISP নম্বর বদলান", isp_name: "ISP-র নাম (ঐচ্ছিক)", isp_phone: "ISP-র ফোন নম্বর", isp_save: "সেভ", isp_cancel: "বাতিল", isp_remove: "সরান", isp_bad: "সঠিক ফোন নম্বর দিন, যেমন 01XXXXXXXXX।", isp_saved: "ISP নম্বর সেভ হয়েছে।", isp_none: "এখনো ISP-র নম্বর দেওয়া নেই। ISP-র নম্বর যোগ করলে এখান থেকেই কল বা মেসেজ করতে পারবেন।", help_title: "সাহায্য", help_sub: "ডেভেলপারের সাথে যোগাযোগ করুন", help_mail: "জিমেইল", help_wa: "হোয়াটসঅ্যাপ", help_mail_open: "ইমেইল পাঠান", help_wa_open: "হোয়াটসঅ্যাপ খুলুন", help_copy: "কপি", help_copied: "কপি হয়েছে", help_close: "বন্ধ করুন", s_auto: "অটো (নিজে রাউটার খুঁজে নেবে)", s_unk: "এই রাউটার এখনো সমর্থিত নয়। \"টেস্ট রিপোর্ট কপি\" চেপে ডেভেলপারকে পাঠান।", rep_copy: "টেস্ট রিপোর্ট কপি", rep_done: "রিপোর্ট কপি হয়েছে", wb_off: "ওয়াইফাই বন্ধ আছে। ট্যাপ করে ওয়াইফাই চালু করুন", wb_no: "ওয়াইফাই-তে যুক্ত নেই। ট্যাপ করে ওয়াইফাই সেটিংস খুলুন", ni_title: "আপনার ওয়াইফাই", ni_conn: "ওয়াইফাই সংযুক্ত", ni_off: "ওয়াইফাই-তে নেই", ni_off_h: "আগে রাউটারের ওয়াইফাই-তে যুক্ত হন।", ni_ssid: "ওয়াইফাই", ni_permission: "সংযুক্ত Wi-Fi-এর নাম দেখাতে Location permission দিন", ni_ip: "ডিভাইস আইপি", ni_mask: "সাবনেট মাস্ক", ni_gw: "রাউটার ঠিকানা", ni_dns: "প্রাইমারি ডিএনএস", ni_link: "লিঙ্ক স্পিড", ni_router: "রাউটার", ni_use: "ব্যবহার", ni_copy: "কপি", ni_copied: "কপি হয়েছে", ni_unk: "শনাক্ত হয়নি", ni_look: "খোঁজা হচ্ছে…", ni_ref: "রিফ্রেশ", ni_note: "সঠিক মডেল লগইনের পর দেখা যাবে।", bio_title: "RouterMate আনলক করুন", bio_fp_title: "Fingerprint দিয়ে আনলক", bio_fp_btn: "Fingerprint দিয়ে আনলক", bio_cancel: "অ্যাপ পাসওয়ার্ড বা PIN ব্যবহার করুন", bio_unlock: "Fingerprint দিয়ে আনলক", bio_set_t: "Fingerprint আনলক", bio_dev: "ডিভাইস Fingerprint", bio_dev_s: "ফোনে সেট করা Fingerprint ব্যবহার করে", bio_set_p: "অ্যাপ পাসওয়ার্ড না লিখে ফোনে সেট করা Fingerprint দিয়ে অ্যাপ খুলুন।", bio_on: "চালু", bio_off: "বন্ধ", bio_na: "এই ফোনে সমর্থিত Fingerprint সেট করা নেই।", bio_enabled: "বায়োমেট্রিক আনলক চালু হয়েছে।", bio_failed: "বায়োমেট্রিক যাচাই হয়নি।", pin_title: "আলাদা অ্যাপ PIN", pin_help: "RouterMate-এর জন্য ছয় সংখ্যার PIN তৈরি করুন। এটি ফোনের Screen Lock PIN নয়।", pin_label: "RouterMate PIN (৬ সংখ্যা)", pin_confirm: "RouterMate PIN আবার লিখুন", pin_save: "PIN সংরক্ষণ", pin_disable: "অ্যাপ PIN সরান", pin_unlock: "অ্যাপ PIN দিয়ে আনলক", pin_bad: "অ্যাপ PIN সঠিক নয়।", pin_match: "PIN দুটি মিলতে হবে এবং ছয় সংখ্যার হতে হবে।", pin_saved: "অ্যাপ PIN এই ডিভাইসে সংরক্ষিত হয়েছে।", pin_removed: "অ্যাপ PIN সরানো হয়েছে।", pin_missing: "আগে Security settings থেকে অ্যাপ PIN সেট করুন।", nav_ai: "এআই", title_ai: "এআই সহকারী", at_chat: "সহকারী", at_health: "স্বাস্থ্য", at_dev: "ডিভাইস", at_sec: "নিরাপত্তা", ai_ph: "প্রশ্ন করুন বা কাজ বলুন…", ai_send: "পাঠান", ai_clear: "চ্যাট মুছুন", ai_think: "ভাবছি…", ai_hello: "হাই! আমি ডিভাইস দেখাতে, ধীর ওয়াইফাইয়ের কারণ বলতে, ডিভাইস ব্লক/আনব্লক, ব্ল্যাকলিস্ট, গতি সীমা, নাম বদল আর পরিচিত চিহ্ন দিতে পারি। নিচের একটা চেষ্টা করুন।", ai_setup_t: "এআই এখনও সেট করা হয়নি", ai_setup_p: "চ্যাটের জন্য আপনার নিজের এআই ব্যাকএন্ড লাগবে (এটা Gemini কী অ্যাপের বাইরে নিরাপদ রাখে)। স্বাস্থ্য, ডিভাইস ও নিরাপত্তা ট্যাব এটা ছাড়াই চলে। সেটিংসে ব্যাকএন্ডের লিংক দিন।", ai_goset: "সেটিংস খুলুন", q1: "কোন ডিভাইস সবচেয়ে বেশি ডেটা নিচ্ছে?", q2: "আমার ওয়াইফাই ধীর কেন?", q3: "ব্ল্যাকলিস্ট করা ডিভাইস দেখাও", q4: "আমার নেটওয়ার্কে অস্বাভাবিক কিছু আছে?",
+aiset_t: "এআই ব্যাকএন্ড", aiset_p: "আপনার Cloudflare Worker-এর লিংক ও টোকেন। এগুলো শুধু এই ফোনে থাকে। ai-backend/README.md দেখুন।", aiset_url: "ব্যাকএন্ড লিংক", aiset_tok: "অ্যাপ টোকেন", aiset_off: "সরান", ai_saved: "সেভ হয়েছে।", ai_removed: "সরানো হয়েছে।",
+ae_auth: "ব্যাকএন্ড টোকেন গ্রহণ করেনি। সেটিংসে টোকেন মিলিয়ে দেখুন।", ae_busy: "এআই ব্যস্ত বা ফ্রি সীমা শেষ। এক মিনিট পরে আবার চেষ্টা করুন।", ae_backend: "এআই ব্যাকএন্ডে সমস্যা ({s})।", ae_net: "এআই ব্যাকএন্ডে পৌঁছানো যায়নি। লিংক ও ইন্টারনেট দেখুন।", ae_empty: "এআই কোনো উত্তর দেয়নি। আবার চেষ্টা করুন।", ae_many: "অনেক ধাপ লেগে গেছে। সহজ করে আবার বলুন।",
+ax_ok: "হয়েছে, রাউটার নিশ্চিত করেছে", ax_fail: "হয়নি", ax_read: "রাউটারের তথ্য দেখা হয়েছে", fn_block_device: "ব্লক", fn_unblock_device: "আনব্লক", fn_blacklist_add: "ব্ল্যাকলিস্টে যোগ", fn_blacklist_remove: "ব্ল্যাকলিস্ট থেকে সরানো", fn_set_speed_limit: "গতি সীমা", fn_rename_device: "নাম বদল", fn_mark_known: "পরিচিত চিহ্ন", fn_mark_unknown: "পরিচিত চিহ্ন তোলা", fn_blacklist_show: "অ্যাক্সেস তালিকা", fn_list_devices: "ডিভাইস", fn_top_bandwidth: "সবচেয়ে বেশি ব্যবহার", fn_network_health: "স্বাস্থ্য",
+hp_score: "নেটওয়ার্কের স্বাস্থ্য", hp_insights: "এআই ইনসাইটস", hp_recs: "স্মার্ট পরামর্শ", hp_ask: "এআইকে ব্যাখ্যা করতে বলুন", ph_good: "ভালো", ph_fair: "নজর দিন", ph_poor: "সমস্যা আছে",
+h_good: "রাউটার যা দেখায় তাতে কোনো সমস্যা পাওয়া যায়নি।", h_net: "{r}: ইন্টারনেটের সমস্যা ({s})।", h_open: "{r}: ওয়াইফাইয়ে পাসওয়ার্ড নেই।", h_guest_open: "{r}: গেস্ট ওয়াইফাই পাসওয়ার্ড ছাড়া চালু।", h_crowd: "{r}: {n}টি ডিভাইস অনলাইনে।", h_24only: "{r}: শুধু ২.৪ GHz ওয়াইফাই দেখা যাচ্ছে, তাই অনেক ডিভাইস একই ব্যান্ড ভাগ করছে।", h_heavy: "{n} এখন {p}% ট্রাফিক ব্যবহার করছে।", h_unknown: "{n}টি অনলাইন ডিভাইস আপনি \"পরিচিত\" চিহ্নিত করেননি: {names}।", h_limited: "{n}টি ডিভাইসে গতি সীমা আছে।", h_blocked: "{n}টি ডিভাইস ব্লক করা।",
+r_net: "WAN ক্যাবল দেখুন, ISP-র ডিভাইস রিস্টার্ট করুন, তারপর ISP-কে ফোন করুন (সেটিংসে ISP বোতাম আছে)।", r_open: "রাউটার পেজে (গ্লোব বোতাম) গিয়ে WPA2 ওয়াইফাই পাসওয়ার্ড দিন।", r_guest: "রাউটার পেজে গেস্ট ওয়াইফাই বন্ধ করুন বা পাসওয়ার্ড দিন।", r_crowd: "বেশি ব্যবহারকারী ডিভাইসে সীমা দিন, অচেনা ডিভাইস ব্লক করুন, ব্যবহার না হওয়াগুলো সরান।", r_24: "রাউটারে ৫ GHz নেটওয়ার্ক থাকলে সক্ষম ফোন ও ল্যাপটপ সেখানে নিন।", r_heavy: "অন্যদের ধীর হলে ওই ডিভাইসের গতি সীমা দিন (ডিভাইস পেজে বা এআইকে বলে)।", r_unknown: "ডিভাইস ট্যাবে দেখুন। না চিনলে ব্লক করুন আর ওয়াইফাই পাসওয়ার্ড বদলান।", r_good: "রাউটারের পাসওয়ার্ড শক্ত রাখুন আর মাঝে মাঝে বদলান।", r_limited: "", r_blocked: "",
+di_title: "ডিভাইসের পরিচিতি", di_new: "নতুন", di_known: "পরিচিত", di_markall: "অনলাইন সবাইকে পরিচিত চিহ্নিত করুন", di_none: "কোনো ডিভাইস নেই।", di_me: "এই ফোন", di_off: "অফলাইন", di_blk: "ব্লক", di_note: "নাম রাউটার থেকে আসে। \"নতুন\" মানে আপনি এখনও পরিচিত চিহ্নিত করেননি।",
+sa_title: "নিরাপত্তা পরামর্শ", sa_ok: "রাউটার যা দেখায় তাতে নিরাপত্তার কোনো সমস্যা দেখা যাচ্ছে না।", sa_tip1: "হোয়াইটলিস্ট মোডে শুধু তালিকার ডিভাইস যুক্ত হতে পারে: ওয়াইফাই পেজ, অ্যাক্সেস তালিকা ট্যাব।", sa_tip2: "অচেনা ডিভাইস এলে ব্লক করুন আর রাউটার পেজে ওয়াইফাই পাসওয়ার্ড বদলান।", sa_tip3: "রাউটারের অ্যাডমিন পাসওয়ার্ড কাউকে দিয়ে থাকলে বদলে ফেলুন।", sa_note: "এআই চ্যাট আপনার ব্যাকএন্ডের মাধ্যমে Google Gemini-কে ডিভাইসের নাম, IP ও গতি পাঠায় (পাসওয়ার্ড বা পুরো MAC নয়)।", wt_net: "ওয়াইফাই নেটওয়ার্ক", wt_guest: "গেস্ট নেটওয়ার্ক", wt_acl: "অ্যাক্সেস তালিকা", recent_dev: "সাম্প্রতিক ডিভাইস", connected: "সংযুক্ত", router_status: "রাউটারের অবস্থা", about_t: "RouterMate সম্পর্কে", about_s: "ভার্সন ১.০ · আপনার রাউটারের বন্ধু", tagline: "আপনার রাউটারের সেরা বন্ধু", rd_none: "কোনো ডিভাইস অনলাইনে নেই।", more: "টি ডিভাইস", login_h: "রাউটার অ্যাডমিন লগইন", secure: "নিরাপদ প্রবেশ", nav_overview: "ওভারভিউ", nav_devices: "ডিভাইস", nav_wifi: "ওয়াইফাই", nav_activity: "কার্যকলাপ", nav_settings: "সেটিংস",
+      title_overview: "ওভারভিউ", title_devices: "ডিভাইস", title_wifi: "ওয়াইফাই", title_activity: "কার্যকলাপ", title_settings: "সেটিংস", set_lang: "ভাষা", set_router: "রাউটার", t_guests: "গেস্ট ডিভাইস",
+      login_title: "লগইন", login_sub: "অ্যাপের পাসওয়ার্ড দিন।", l_pass: "অ্যাপের পাসওয়ার্ড", login_btn: "লগইন",
+      login_bad: "পাসওয়ার্ড ভুল।", logout: "লগ আউট", router_page: "রাউটারের পেজ খুলুন", guest_pill: "গেস্ট", guest_note: "গেস্ট ডিভাইস শুধু দেখা যায়।", lang_btn: "English",
+      online: "অনলাইন", offline: "অফলাইন", blocked: "ব্লক করা", reconnecting: "রাউটার পাওয়া যাচ্ছে না", live: "লাইভ",
+      t_online: "অনলাইন ডিভাইস", t_down: "ডাউনলোড", t_up: "আপলোড", t_blocked: "ব্লক করা",
+      chart_title: "ট্রাফিক, শেষ ২ মিনিট", lg_down: "ডাউনলোড", lg_up: "আপলোড", ago: "২ মিনিট আগে", nowl: "এখন",
+      top_title: "এখন সবচেয়ে দ্রুত", none_active: "এখন কোনো ডিভাইস ইন্টারনেট ব্যবহার করছে না।",
+      search_ph: "নাম, আইপি বা ম্যাক খুঁজুন", f_all: "সব", f_online: "অনলাইন", f_blocked: "ব্লক করা", no_match: "কোনো ডিভাইস মেলেনি।",
+      u_now: "এখন", u_none: "ইন্টারনেট বন্ধ", limit: "সীমা", no_limit: "সীমা নেই", block: "ব্লক", unblock: "আনব্লক", this_pc: "এই কম্পিউটার",
+      ptr_pull: "রিফ্রেশ করতে নিচে টানুন", ptr_release: "ছেড়ে দিন, রিফ্রেশ হবে", ptr_loading: "রিফ্রেশ হচ্ছে…", isp_title: "ISP", isp_wa: "হোয়াটসঅ্যাপ", isp_call: "কল করুন", isp_bkash: "বিকাশ", isp_imo: "ইমো", isp_imo_copied: "নম্বর কপি হয়েছে। ইমোতে সার্চ বা পেস্ট করুন।", isp_noimo: "ইমো অ্যাপ পাওয়া যায়নি। স্টোরের পেজ খুলছে।", isp_copied: "নম্বর কপি হয়েছে। বিকাশে Send Money বেছে পেস্ট করুন।", isp_nobkash: "বিকাশ অ্যাপ পাওয়া যায়নি। স্টোরের পেজ খুলছে।", isp_nowa: "হোয়াটসঅ্যাপ খোলা যায়নি।", wan_title: "ইন্টারনেটের বিস্তারিত", via_pill: "আপনি এর মধ্য দিয়ে যুক্ত", grp_count: "{n}টি ডিভাইস", set_routers: "রাউটারসমূহ", a_type: "রাউটারের মডেল", r_readonly: "শুধু দেখা যায়", add_router: "আরেকটি রাউটার যোগ করুন", s_name: "রাউটারের নাম", add_btn: "রাউটার যোগ করুন", r_open: "পেজ খুলুন", r_remove: "সরান", r_confirm: "সরাতে আবার চাপুন", r_ok: "যুক্ত", r_active: "সক্রিয়", r_inactive: "নিষ্ক্রিয়", r_activate: "সক্রিয় করুন", r_deactivate: "নিষ্ক্রিয় করুন", r_none_active: "কোনো সক্রিয় রাউটার নেই। সেটিংস → রাউটার থেকে একটি সক্রিয় করুন।", r_all: "সব সক্রিয় রাউটার", r_added: "রাউটার যোগ হয়েছে।", r_last: "কমপক্ষে একটি রাউটার থাকতেই হবে।", r_dup: "এই রাউটার আগেই যোগ করা আছে।", e_start: "{r}-এর সাথে যুক্ত হয়েছে", net_connecting: "যুক্ত হচ্ছে…", nm_connecting: "রাউটার ISP-র সাথে যুক্ত হচ্ছে। এক মিনিট অপেক্ষা করুন।", net_ip_conflict: "IP সংঘর্ষ", nm_ip_conflict: "রাউটারের LAN ঠিকানা ISP নেটওয়ার্কের সাথে মিলে যাচ্ছে। রাউটারের পেজে LAN IP বদলান।", net_auth_failed: "ISP লগইন ব্যর্থ", nm_auth_failed: "ISP-র (PPPoE) ইউজারনেম বা পাসওয়ার্ড গ্রহণ হয়নি। রাউটারের পেজে মিলিয়ে দেখুন।", net_ok: "ইন্টারনেট চলছে", net_unplugged: "WAN ক্যাবল লাগানো নেই", net_no_ip: "WAN ঠিকানা নেই (ক্যাবল খোলা বা ISP-র সমস্যা)", net_no_internet: "ইন্টারনেট সংযোগ নেই", net_unknown: "ইন্টারনেটের অবস্থা জানা যায়নি", nm_ok: "রাউটার অনলাইনে আছে।", nm_unplugged: "রাউটারের WAN (ইন্টারনেট) পোর্টের ক্যাবল খুলে গেছে বা ঢিলা। ISP-র ক্যাবল দেখুন।", nm_no_ip: "রাউটারের ইন্টারনেট ঠিকানা নেই। হয় WAN ক্যাবল খোলা, নয়তো ক্যাবল লাগানো আছে কিন্তু ISP ঠিকানা দিচ্ছে না। আগে ক্যাবল দেখুন, তারপর ISP-র ডিভাইস রিস্টার্ট করুন বা ISP-কে ফোন করুন।", nm_no_internet: "রাউটারে সংযোগ আছে কিন্তু ইন্টারনেট নেই। ISP-র সমস্যা হতে পারে।", n_ip: "WAN ঠিকানা", n_gw: "গেটওয়ে", n_type: "সংযোগের ধরন", n_up: "যুক্ত আছে", n_link: "লিংকের গতি", n_code: "রাউটার কোড", e_net: "ইন্টারনেট: {s}", g_title: "গেস্ট নেটওয়ার্ক", g_f3: "এই রাউটারে গেস্ট নেটওয়ার্ক নেই।", g_devs: "গেস্ট ডিভাইস", g_none: "কোনো গেস্ট ডিভাইস যুক্ত নেই।", g_for: "যুক্ত আছে", g_state: "অবস্থা", g_on: "চালু", g_off: "বন্ধ", g_open: "পাসওয়ার্ড নেই", g_pw: "পাসওয়ার্ড দেওয়া", g_speed: "গতির সীমা", g_nolim: "সীমা নেই",
+      wifi_title: "ওয়াইফাই নেটওয়ার্ক", w_24: "২.৪ গিগাহার্টজের নাম", w_5: "৫ গিগাহার্টজের নাম", w_sec: "নিরাপত্তা", w_pc: "যুক্ত ডিভাইস",
+      wifi_note: "এই অ্যাপ থেকে ওয়াইফাইয়ের নাম বা পাসওয়ার্ড বদলানো এখনো তৈরি হয়নি। সেজন্য রাউটারের পেজ ব্যবহার করুন।",
+      recent: "সাম্প্রতিক ঘটনা", e_block: "{n} ব্লক করা হয়েছে", e_unblock: "{n} আনব্লক করা হয়েছে", e_limit: "{n}-এর সীমা: {l}", e_in: "{n} যুক্ত হয়েছে", e_out: "{n} বেরিয়ে গেছে",
+      s_dummy: "",
+      acl_title: "অ্যাক্সেস তালিকা", acl_black: "ব্ল্যাকলিস্ট", acl_white: "হোয়াইটলিস্ট", acl_hint_deny: "ব্ল্যাকলিস্ট: টিক দেওয়া ডিভাইস ওয়াইফাই ব্যবহার করতে পারবে না। বাকি সবাই পারবে।", acl_hint_pass: "হোয়াইটলিস্ট: শুধু টিক দেওয়া ডিভাইস ওয়াইফাই ব্যবহার করতে পারবে। বাকি সবাই আটকে যাবে।", acl_save: "সেভ করুন", acl_confirm: "প্রয়োগ করতে আবার চাপুন", acl_you: "এই ফোন", acl_saved: "সেভ হয়েছে।", acl_loading: "লোড হচ্ছে…", acl_empty: "এখনো কোনো ডিভাইস নেই।", acl_off: "এখনো সেভ হয়নি",
+      setup_title: "সেটআপ", setup_sub: "একবার রাউটারের সাথে যুক্ত করুন। বাসার ওয়াইফাইতে থাকুন।", s_url: "রাউটারের ঠিকানা", s_rpw: "রাউটারের অ্যাডমিন পাসওয়ার্ড", s_apw: "অ্যাপের নতুন পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)", s_apw2: "অ্যাপের পাসওয়ার্ড আবার দিন", s_btn: "সেভ করে যুক্ত করুন", s_short: "অ্যাপের পাসওয়ার্ডে কমপক্ষে ৬টি অক্ষর লাগবে।", s_match: "দুটি পাসওয়ার্ড মেলেনি।", s_checking: "যুক্ত হচ্ছে…", s_rbad: "রাউটার ওই পাসওয়ার্ড গ্রহণ করেনি।", app_settings: "অ্যাপের সেটিংস", app_settings_btn: "রাউটার বা অ্যাপের পাসওয়ার্ড বদলান", app_settings_confirm: "সেভ করা তথ্য মুছতে আবার চাপুন",
+      x_blocked: "{n} ব্লক করা হয়েছে", x_unblocked: "{n} আবার ইন্টারনেট ব্যবহার করতে পারবে", x_limit: "{n}: {l}", updated: "আপডেট", confirm_block: "ব্লক করতে আবার চাপুন", err_prefix: "রাউটারের সমস্যা: "
+    }
+  };
+  var lang = "en";
+  try { var sv = localStorage.getItem("wifi-lang"); if (sv === "bn" || sv === "en") lang = sv; } catch (e) {}
+  function t(k, v) { var s = (T[lang][k] != null ? T[lang][k] : T.en[k]) || k; if (v) Object.keys(v).forEach(function (x) { s = s.replace("{" + x + "}", v[x]); }); return s; }
+  function num(x, d) { return Number(x).toLocaleString(lang === "bn" ? "bn-BD" : "en-US", { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 }); }
+  function $(s) { return document.querySelector(s); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  var UNLIMITED = 38528, LIMITS = [0, 1, 2, 5, 10]; // Mbps; the router keeps limits in KB/s
+  var ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>';
+  var PC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 20h20"/></svg>';
+  var acl = { mode: "deny", sel: {}, saved: null, me: "", loaded: false, busy: false, rid: "" };
+  var state = { devices: [], guests: [] }, events = [], filter = "all", query = "", route = "overview", user = null, pending = {}, failing = false;
+  var series = { d: [], u: [] }, MAXPTS = 40, timer = null, prevMap = null, ttimer;
+
+  function toast(m) { var el = $("#toast"); el.textContent = m; el.hidden = false; clearTimeout(ttimer); ttimer = setTimeout(function () { el.hidden = true; }, 2800); }
+  // ---- no server: the app talks to the routers itself through the Android bridge (Native) ----
+  var pendingCalls = {}, seq = 0, unlocked = false, cfg = null, USER = { name: "admin", role: "admin" };
+  var R = {}, sel = "all"; // R: one entry per router (client + latest data); sel: "all" or a router id
+  function b64d(s) { if (!s) return ""; var bin = atob(s), bytes = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i); return new TextDecoder("utf-8").decode(bytes); }
+  function b64e(s) { return btoa(unescape(encodeURIComponent(s))); }
+  window.NativeDone = function (id, status, loc, cookies, body) { var p = pendingCalls[id]; if (!p) return; delete pendingCalls[id]; p.ok({ status: status, location: b64d(loc), cookies: b64d(cookies).split("\n").filter(Boolean), text: b64d(body) }); };
+  window.NativeFail = function (id, msg) { var p = pendingCalls[id]; if (!p) return; delete pendingCalls[id]; p.no(new Error(b64d(msg))); };
+  var nativeApi = {
+    http: function (method, url, headers, body) {
+      return new Promise(function (ok, no) {
+        var id = "r" + (++seq); pendingCalls[id] = { ok: ok, no: no };
+        var h = Object.keys(headers).map(function (k) { return k + ": " + headers[k]; }).join("\n");
+        try { Native.http(id, method, url, h, body ? b64e(body) : ""); } catch (e) { delete pendingCalls[id]; no(e); }
+      });
+    },
+    md5: function (s) { return Native.md5(s); },
+    aes: function (enc, s) { return Native.aes(enc, s); },
+    b64: b64e
+  };
+  function loadCfg() {
+    try {
+      var c = JSON.parse(localStorage.getItem("wifi-cfg") || "null");
+      if (c && !c.routers && c.url) { c.routers = [{ id: "r1", name: "Router 1", url: c.url, rpw: c.rpw }]; delete c.url; delete c.rpw; localStorage.setItem("wifi-cfg", JSON.stringify(c)); }
+      return c;
+    } catch (e) { return null; }
+  }
+  function saveCfg() { try { localStorage.setItem("wifi-cfg", JSON.stringify(cfg)); } catch (e) {} }
+  function allRouters() { return (cfg && cfg.routers) || []; }
+  // Routers without an explicit flag are treated as active for backward compatibility.
+  function routers() { return allRouters().filter(function (r) { return r.active !== false; }); }
+  function multi() { return routers().length > 1; }
+  // Use each router Wi-Fi SSID instead of its generated internal profile label.
+  function routerLabel(r) { var p = allRouters().filter(function (x) { return x.id === r.id; })[0] || {}, w = (R[r.id] && R[r.id].wifi) || {}, a = String(w.ssid24 || p.ssid24 || "").trim(), b = String(w.ssid5 || p.ssid5 || "").trim(); if (a && b && a !== b) return a + " / " + b; return a || b || r.name || "Router"; }
+  function aclRouters() { return routers(); }
+  function aclDefault() { var a = aclRouters(), c = curId(); return a.some(function (r) { return r.id === c; }) ? c : (a[0] && a[0].id) || ""; }
+  function curId() { return sel !== "all" && R[sel] ? sel : (routers()[0] && routers()[0].id); }
+  function inSel(x) { return sel === "all" || x.rid === sel; }
+  function buildClients() {
+    var nr = {};
+    routers().forEach(function (r) {
+      var o = R[r.id] || { devices: [], guests: [], wifi: {}, me: null, net: null, prevMap: null, prevNet: null, error: "" };
+      o.id = r.id; o.name = r.name; o.url = r.url; o.rc = new RouterClient({ url: r.url, password: r.rpw, native: nativeApi, type: r.type }); o.type = r.type || "ac5"; nr[r.id] = o;
+    });
+    R = nr; if (sel !== "all" && !R[sel]) sel = "all";
+  }
+  function e401(m) { var e = new Error(m || "Sign in first"); e.status = 401; return e; }
+  function api(path, body) {
+    return Promise.resolve().then(function () {
+      if (path === "/api/login") {
+        if (!cfg || Native.sha256(cfg.salt + (body.password || "")) !== cfg.hash) throw e401("Wrong password");
+        unlocked = true; return USER;
+      }
+      if (path === "/api/logout") { unlocked = false; R = {}; return {}; }
+      if (!unlocked) throw e401();
+      var r = R[(body && body.rid) || curId()]; if (!r) throw new Error("No router");
+      if (path === "/api/filter") return r.rc.getFilter();
+      if (path === "/api/filter/set") return r.rc.setFilter(body.mode, body.macs).then(function () { return { ok: true }; });
+      if (path === "/api/block") return r.rc.setBlocked(body.mac, !!body.blocked).then(function () { return { ok: true }; });
+      if (path === "/api/rename") return r.rc.setRemark(body.mac, body.name).then(function () { return { ok: true }; });
+      if (path === "/api/limit") return r.rc.setLimit(body.mac, +body.kbps || 0).then(function () { return { ok: true }; });
+      throw new Error("Not found");
+    });
+  }
+  function nowStr() { var d = new Date(); return ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2); }
+  function log(key, v) { events.unshift({ time: nowStr(), key: key, v: v }); renderActivity(); }
+  function mbps(kbps) { return kbps * 8 / 1000; }
+  function limitMbps(d) { return !(d.limitDownKBps > 0) || d.limitDownKBps >= UNLIMITED ? 0 : Math.round(d.limitDownKBps * 8 / 1000); }
+  function isMe(d) { var r = R[d.rid], m = r && r.me && r.me.localhostMAC; return !!m && m.toLowerCase() === d.mac; }
+  function rtag(x) { return multi() ? ' <span class="pill rt">' + esc(x.rname) + "</span>" : ""; }
+
+  function applyStatic() {
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) { el.textContent = t(el.dataset.i18n); });
+    document.querySelectorAll("[data-i18n-title]").forEach(function (el) { el.title = t(el.dataset.i18nTitle); el.setAttribute("aria-label", el.title); });
+    document.querySelectorAll("[data-i18n-ph]").forEach(function (el) { el.placeholder = t(el.dataset.i18nPh); });
+    document.querySelectorAll("[data-lang-toggle]").forEach(function (el) { el.textContent = t("lang_btn"); });
+    try { ispRender(); } catch (e) {}
+    renderRoute(); renderAll();
+  }
+  document.querySelectorAll("[data-lang-toggle]").forEach(function (b) { b.addEventListener("click", function () { lang = lang === "en" ? "bn" : "en"; try { localStorage.setItem("wifi-lang", lang); } catch (e) {} applyStatic(); renderAcl(); markLang(); }); });
+
+  var VIEWS = ["overview", "devices", "wifi", "ai", "activity", "settings"];
+  document.addEventListener("visibilitychange", function () { var h = document.querySelector(".holo"); if (h) h.classList.toggle("paused", document.hidden); });
+  function renderRoute() {
+    VIEWS.forEach(function (k) { $("#view-" + k).hidden = k !== route; var a = document.querySelector('[data-nav="' + k + '"]'); if (k === route) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+    $("#page-title").textContent = t("title_" + route);
+    if (route === "wifi" && !acl.loaded && !acl.busy && unlocked) { acl.busy = true; if (!acl.rid || (sel !== "all" && acl.rid !== sel)) acl.rid = aclDefault(); loadAcl().then(function () { acl.busy = false; renderAcl(); }); }
+  }
+  function readHash() { var h = (location.hash || "#overview").slice(1); route = VIEWS.indexOf(h) > -1 ? h : "overview"; renderRoute(); }
+  window.addEventListener("hashchange", readHash);
+
+  function renderTiles() {
+    var ds = state.devices.filter(inSel);
+    $("#t-online").textContent = num(ds.filter(function (d) { return d.online && !d.blocked; }).length);
+    $("#t-blocked").textContent = num(ds.filter(function (d) { return d.blocked; }).length);
+    $("#t-guests").textContent = num(state.guests.filter(inSel).length);
+  }
+  function renderTop() {
+    var list = state.devices.filter(function (d) { return d.online && d.downKBps + d.upKBps > 0; }).sort(function (a, b) { return b.downKBps + b.upKBps - a.downKBps - a.upKBps; }).slice(0, 5);
+    if (!list.length) { $("#top-users").innerHTML = '<li style="grid-template-columns:1fr;color:var(--muted)">' + t("none_active") + "</li>"; return; }
+    var max = list[0].downKBps + list[0].upKBps;
+    $("#top-users").innerHTML = list.map(function (d) { var v = d.downKBps + d.upKBps; return "<li><span>" + esc(d.name) + '</span><span class="mono">' + num(mbps(v), 2) + ' Mbps</span><div class="bar"><span style="width:' + (v / max * 100).toFixed(0) + '%"></span></div></li>'; }).join("");
+  }
+  function renderChart() {
+    var W = 480, H = 190, L = 34, R = 8, T0 = 8, B = 20, N = MAXPTS, d = series.d, u = series.u;
+    if (d.length < 2) { $("#chart").innerHTML = ""; return; }
+    var max = Math.max(1, Math.ceil(Math.max.apply(null, d.concat(u)) * 1.15 * 10) / 10);
+    function X(i) { return L + i * (W - L - R) / (N - 1) + (N - d.length) * (W - L - R) / (N - 1); }
+    function Y(v) { return T0 + (H - T0 - B) * (1 - v / max); }
+    function path(a) { return a.map(function (v, i) { return (i ? "L" : "M") + X(i).toFixed(1) + " " + Y(v).toFixed(1); }).join(""); }
+    var g = ""; for (var k = 0; k <= 4; k++) { var v = max * k / 4, y = Y(v); g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y + '" y2="' + y + '" stroke="var(--line)"/><text x="' + (L - 6) + '" y="' + (y + 3) + '" text-anchor="end">' + (max >= 10 ? Math.round(v) : v.toFixed(1)) + "</text>"; }
+    $("#chart").innerHTML = g + '<text x="' + L + '" y="' + (H - 4) + '">' + t("ago") + '</text><text x="' + (W - R) + '" y="' + (H - 4) + '" text-anchor="end">' + t("nowl") + "</text>" +
+      '<path d="' + path(d) + "L" + X(d.length - 1) + " " + Y(0) + "L" + X(0) + " " + Y(0) + 'Z" fill="var(--accent)" fill-opacity="0.14"/>' +
+      '<path d="' + path(d) + '" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>' +
+      '<path d="' + path(u) + '" fill="none" stroke="var(--warn)" stroke-width="2" stroke-linejoin="round"/>' +
+      '<circle cx="' + X(d.length - 1) + '" cy="' + Y(d[d.length - 1]) + '" r="4" fill="var(--accent)"/><circle cx="' + X(u.length - 1) + '" cy="' + Y(u[u.length - 1]) + '" r="4" fill="var(--warn)"/>';
+  }
+  function renderDevices() {
+    var q = query.toLowerCase();
+    function hit(x) { return !q || (x.name + " " + x.ip + " " + x.mac).toLowerCase().indexOf(q) > -1; }
+    function card(d) {
+      var st = d.blocked ? '<span class="pill bad">' + t("blocked") + "</span>" : d.online ? '<span class="pill good">' + t("online") + "</span>" : '<span class="pill warn">' + t("offline") + "</span>";
+      var f3 = R[d.rid] && R[d.rid].type === "f3";
+      var me = isMe(d) ? ' <span class="pill warn">' + t(f3 ? "via_pill" : "this_pc") + "</span>" : "";
+      var cur = limitMbps(d), key = d.rid + "|" + d.mac;
+      var opts = LIMITS.map(function (l) { return '<option value="' + l + '"' + (cur === l ? " selected" : "") + ">" + (l ? num(l) + " Mbps" : t("no_limit")) + "</option>"; }).join("");
+      if (LIMITS.indexOf(cur) < 0) opts += '<option value="' + cur + '" selected>' + num(cur) + " Mbps</option>";
+      var use = d.blocked ? t("u_none") : d.online ? t("u_now") + " <b>↓ " + num(mbps(d.downKBps), 2) + " ↑ " + num(mbps(d.upKBps), 2) + " Mbps</b>" : "";
+      var busy = pending[key] ? " disabled" : "";
+      var blockBtn = isMe(d) && !d.blocked ? "" : '<button class="btn sm ' + (d.blocked ? "" : "danger") + '" type="button" data-block="' + key + '"' + busy + ">" + (d.blocked ? t("unblock") : t("block")) + "</button>";
+      var acts = d.readonly ? '<div class="acts"><span class="pill warn">' + t("r_readonly") + "</span></div>" : d.noLimit ? '<div class="acts">' + blockBtn + "</div>" :
+        '<div class="acts"><label>' + t("limit") + ' <select data-limit="' + key + '"' + (d.blocked || !d.online || busy ? " disabled" : "") + ">" + opts + "</select></label>" + blockBtn + "</div>";
+      return '<div class="dev' + (d.blocked ? " blocked" : "") + '"><div class="ico">' + (isMe(d) ? PC : ICON) + "</div>" +
+        '<div><div class="name">' + esc(d.name) + " " + st + me + '</div><div class="meta">' + (d.ip ? d.ip + " · " : "") + d.mac + (d.band ? " · " + d.band.replace("wifi_", "") : "") + "</div></div>" +
+        '<div class="use">' + use + "</div>" + acts + "</div>";
+    }
+    function gcard(g) {
+      return '<div class="dev"><div class="ico">' + ICON + '</div><div><div class="name">' + esc(g.name) + ' <span class="pill warn">' + t("guest_pill") + '</span> <span class="pill good">' + t("online") + '</span></div><div class="meta">' + esc(g.ip) + " · " + g.mac + " · " + g.band + '</div></div>' +
+        '<div class="use">' + t("u_now") + " <b>↓ " + num(mbps(g.downKBps), 2) + " ↑ " + num(mbps(g.upKBps), 2) + " Mbps</b></div></div>";
+    }
+    var html = "", total = 0;
+    routers().forEach(function (r) {
+      if (!inSel({ rid: r.id })) return;
+      var o = R[r.id] || {};
+      var list = (o.devices || []).filter(function (d) {
+        if (filter === "online" && !(d.online && !d.blocked)) return false;
+        if (filter === "blocked" && !d.blocked) return false;
+        return hit(d);
+      });
+      var guests = filter === "blocked" ? [] : (o.guests || []).filter(hit);
+      total += list.length + guests.length;
+      if (!list.length && !guests.length && !o.error) return;
+      var head = multi() ? '<h3 class="grp"><span>' + esc(routerLabel(r)) + "</span><small>" + (o.error ? esc(o.error) : t("grp_count", { n: list.length + guests.length })) + "</small></h3>" : "";
+      html += '<section class="grp-box">' + head + list.map(card).join("") + guests.map(gcard).join("") + "</section>";
+    });
+    $("#devices").innerHTML = total || html ? html : '<div class="panel">' + t("no_match") + "</div>";
+  }
+  function wifiBlock(r) {
+    var w = r.wifi || {}, g = w.guest || {}, kv = function (k, v) { return "<dt>" + esc(t(k)) + "</dt><dd>" + esc(v) + "</dd>"; };
+    var gd = r.guests.length ? r.guests.map(function (d) {
+      var m = Math.floor(d.seconds / 60), dur = m >= 60 ? Math.floor(m / 60) + "h " + (m % 60) + "m" : m + "m";
+      return '<div class="acl-row"><span>' + esc(d.name) + " · " + d.band + "<small>" + esc(d.ip) + " · " + d.mac + "</small><small>↓ " + num(mbps(d.downKBps), 2) + " ↑ " + num(mbps(d.upKBps), 2) + " Mbps · " + esc(t("g_for")) + " " + dur + "</small></span></div>";
+    }).join("") : '<p class="hint">' + esc(t("g_none")) + "</p>";
+    var has5 = !!(w.ssid5 || "").trim();
+    return '<div class="panel wb-net"><h2>' + esc(t("wifi_title")) + (multi() ? " · " + esc(r.name) : "") + "</h2><dl class=\"kv\">" + kv("w_24", (w.ssid24 || "").trim()) + (has5 ? kv("w_5", (w.ssid5 || "").trim()) : "") + kv("w_sec", w.security || "") +
+      kv("w_pc", num(r.devices.filter(function (d) { return d.online; }).length)) + "</dl></div>" +
+      (r.type === "f3" ? '<div class="panel wb-guest"><p class="hint">' + esc(t("g_f3")) + "</p></div>" : '<div class="panel wb-guest"><h2>' + esc(t("g_title")) + (multi() ? " · " + esc(r.name) : "") + "</h2><dl class=\"kv\">" + kv("g_state", g.on24 || g.on5 ? t("g_on") : t("g_off")) + kv("w_24", (g.ssid24 || "").trim()) + (has5 ? kv("w_5", (g.ssid5 || "").trim()) : "") +
+      kv("w_sec", g.open ? t("g_open") : t("g_pw")) + kv("g_speed", g.speedKBps > 0 && g.speedKBps < 38528 ? num(g.speedKBps * 8 / 1000, 2) + " Mbps" : t("g_nolim")) + '</dl><h2 style="margin-top:16px">' + esc(t("g_devs")) + "</h2>" + gd + "</div>");
+  }
+  function renderWifi() {
+    var ids = Object.keys(R).filter(function (id) { return sel === "all" || id === sel; });
+    $("#wifi-body").innerHTML = ids.map(function (id) { return wifiBlock(R[id]); }).join("");
+  }
+  function renderActivity() {
+    $("#activity").innerHTML = events.slice(0, 40).map(function (e) { return "<li><time>" + e.time + '</time><span class="ev ev-' + e.key + '">' + esc(t(e.key, e.v)) + "</span></li>"; }).join("");
+  }
+  function renderStatus() {
+    var p = $("#conn"); p.className = "pill " + (failing ? "bad" : "good"); p.textContent = failing ? t("reconnecting") : t("live");
+    var wifiInfo = niInfo();
+    $("#who").textContent = wifiInfo && wifiInfo.wifi && wifiInfo.ssid ? wifiInfo.ssid : (wifiInfo && wifiInfo.wifi ? t("ni_permission") : t("ni_off"));
+  }
+  function renderNet() {
+    var ids = Object.keys(R).filter(function (id) { return (sel === "all" || id === sel) && R[id].net; });
+    $("#nets").innerHTML = !routers().length ? '<div class="panel hint">' + esc(t("r_none_active")) + '</div>' : ids.map(function (id) {
+      var r = R[id], net = r.net, c = routers().filter(function (x) { return x.id === id; })[0] || {};
+      var host = (c.url || "").replace(/^https?:\/\//, "").replace(/\/.*$/, "");
+      return '<div class="panel net hero ' + (net.state === "ok" ? "ok" : "bad") + '"><img class="hero-img" src="img/router-illustration.svg" alt="Router illustration"><div class="hero-t"><small>' + esc(t("router_status")) + (multi() ? " · " + esc(r.name) : "") + '</small><div class="net-head"><span class="net-dot"></span><b>' + esc(t("net_" + net.state)) + '</b></div><p class="hint">' + esc(t("nm_" + net.state)) + '</p><small class="mono">' + ({ ac5: "Tenda AC5", f3: "Tenda F3", netis: "Netis" }[c.type] || "Tenda AC5") + " · " + esc(host) + "</small></div></div>";
+    }).join("");
+  }
+  function renderLists() {
+    function chips(a) { return a.length ? a.map(function (d) { return '<span class="bchip">' + esc(d.name) + (multi() ? " · " + esc(d.rname) : "") + "</span>"; }).join("") : '<span class="bnone">—</span>'; }
+    $("#bl-blocked").innerHTML = chips(state.devices.filter(inSel).filter(function (d) { return d.blocked; }));
+    $("#bl-guests").innerHTML = chips(state.guests.filter(inSel));
+  }
+  function renderRecent() {
+    var ds = state.devices.filter(inSel).filter(function (d) { return d.online && !d.blocked; }).slice(0, 3);
+    $("#recent-dev").innerHTML = ds.length ? ds.map(function (d) { return '<div class="rd"><span class="rd-i"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg></span><div class="rd-n">' + esc(d.name) + "<small>" + esc(d.ip) + '</small></div><span class="rd-s">' + esc(t("connected")) + "</span></div>"; }).join("") : '<p class="hint">' + esc(t("rd_none")) + "</p>";
+  }
+  // The technical details (WAN address, gateway, link speed...) live on the WiFi page.
+  function renderWan() {
+    var ids = Object.keys(R).filter(function (id) { return (sel === "all" || id === sel) && R[id].net; });
+    $("#wans").innerHTML = ids.map(function (id) {
+      var r = R[id], net = r.net, m = Math.floor(net.seconds / 60);
+      var up = m >= 1440 ? Math.floor(m / 1440) + "d " + Math.floor((m % 1440) / 60) + "h" : m >= 60 ? Math.floor(m / 60) + "h " + (m % 60) + "m" : m + "m";
+      var rows = [["n_ip", net.ip || "—"], ["n_gw", net.gateway || "—"], ["n_type", (net.type || "").toUpperCase()], ["n_link", net.linkMbps ? net.linkMbps + " Mbps" : "—"], ["n_up", net.state === "ok" ? up : "—"], ["n_code", net.code || "—"]];
+      return '<div class="panel"><h2>' + (multi() ? esc(r.name) + " · " : "") + esc(t("wan_title")) + '</h2><dl class="kv">' +
+        rows.map(function (x) { return "<dt>" + esc(t(x[0])) + "</dt><dd>" + esc(x[1]) + "</dd>"; }).join("") + "</dl></div>";
+    }).join("");
+  }
+  function renderBar() {
+    var bar = $("#rbar"); bar.hidden = !multi(); if (!multi()) return;
+    var items = [["all", t("r_all")]].concat(routers().map(function (r) { return [r.id, routerLabel(r)]; }));
+    bar.innerHTML = items.map(function (x) { return '<button class="chip" type="button" data-r="' + esc(x[0]) + '" aria-pressed="' + (sel === x[0] ? "true" : "false") + '">' + esc(x[1]) + "</button>"; }).join("");
+  }
+  function renderRouters() {
+    $("#router-list").innerHTML = allRouters().map(function (r) {
+      var active = r.active !== false, o = R[r.id] || {};
+      var connection = !active ? "" : (o.error ? '<span class="pill bad rt-state">' + esc(o.error) + "</span>" : '<span class="pill good rt-state">' + t("r_ok") + "</span>");
+      var status = '<span class="pill ' + (active ? "good" : "warn") + ' rt-state">' + t(active ? "r_active" : "r_inactive") + "</span>";
+      return '<div class="rt-row"><div class="grow"><b>' + esc(routerLabel(r)) + "</b><small>" + esc(r.url) + "</small>" + status + connection + '</div><button class="btn sm rt-toggle" type="button" data-rtoggle="' + esc(r.id) + '" aria-pressed="' + (active ? "true" : "false") + '">' + t(active ? "r_deactivate" : "r_activate") + '</button><button class="btn sm" type="button" data-ropen="' + esc(r.id) + '">' + t("r_open") + '</button>' +
+        (allRouters().length > 1 ? '<button class="btn sm danger" type="button" data-rdel="' + esc(r.id) + '">' + t("r_remove") + "</button>" : "") + "</div>";
+    }).join("");
+  }
+  var aclSig = "";
+  function renderAll() {
+    var sg = aclDevices().map(function (d) { return d.mac + d.name; }).join("|") + "|" + routers().length + "|" + allRouters().length; if (sg !== aclSig) { aclSig = sg; renderAcl(); }
+    renderBar(); renderTiles(); renderAi(); renderLists(); renderRecent(); renderDevices(); renderWifi(); renderNet(); renderWan(); renderActivity(); renderStatus(); renderRouters();
+  }
+
+  function pollOne(r) {
+    var tag = multi() ? " (" + r.name + ")" : "";
+    return r.rc.snapshot().then(function (s) {
+      r.error = "";
+      var map = {}; s.devices.forEach(function (d) { map[d.mac] = d; });
+      if (r.prevMap) {
+        s.devices.forEach(function (d) { var p = r.prevMap[d.mac]; if ((!p || !p.online) && d.online) log("e_in", { n: d.name + tag }); });
+        Object.keys(r.prevMap).forEach(function (m) { if (r.prevMap[m].online && !(map[m] && map[m].online)) log("e_out", { n: r.prevMap[m].name + tag }); });
+      } else log("e_start", { r: r.name });
+      r.prevMap = map; r.devices = s.devices; r.guests = s.guests || []; r.me = s.me; r.wifi = s.wifi;
+      var profile = allRouters().filter(function (x) { return x.id === r.id; })[0], w = s.wifi || {};
+      if (profile) { var a = String(w.ssid24 || "").trim(), b = String(w.ssid5 || "").trim(); if (profile.ssid24 !== a || profile.ssid5 !== b) { profile.ssid24 = a; profile.ssid5 = b; saveCfg(); } }
+      return r.rc.internet().then(function (n) {
+        r.net = n;
+        if (r.prevNet && r.prevNet !== n.state) { var msg = (multi() ? r.name + " – " : "") + t("net_" + n.state); log("e_net", { s: msg }); toast(msg); }
+        r.prevNet = n.state;
+      }, function () { r.net = null; });
+    }).catch(function (e) { r.error = e.message || String(e); });
+  }
+  function poll() {
+    var ids = Object.keys(R);
+    return Promise.all(ids.map(function (id) { return pollOne(R[id]); })).then(function () {
+      state.devices = []; state.guests = [];
+      ids.forEach(function (id) {
+        var r = R[id];
+        r.devices.forEach(function (d) { d.rid = id; d.rname = r.name; state.devices.push(d); });
+        r.guests.forEach(function (g) { g.rid = id; g.rname = r.name; state.guests.push(g); });
+      });
+      var bad = ids.filter(function (id) { return R[id].error; });
+      failing = ids.length > 0 && bad.length === ids.length;
+      $("#err").hidden = !bad.length;
+      $("#err").textContent = bad.map(function (id) { return (multi() ? R[id].name + ": " : "") + R[id].error; }).join(" | ");
+      $("#updated").textContent = t("updated") + " " + nowStr();
+      renderAll();
+    });
+  }
+  function requestSsidPermission() {
+    try {
+      if (Native.requestWifiNamePermission && Native.hasWifiNamePermission && !Native.hasWifiNamePermission()) Native.requestWifiNamePermission();
+    } catch (e) {}
+  }
+  function start() {
+    acl.loaded = false; acl.busy = false; acl.rid = ""; sel = "all"; R = {}; buildClients();
+    $("#setup").hidden = true; $("#login").hidden = true; $("#app").hidden = false; $("#ni-wrap").hidden = true; $("#help-first").hidden = true; readHash();
+    requestSsidPermission();
+    poll(); clearInterval(timer); timer = setInterval(poll, 6000);
+  }
+  function signedOut() { clearInterval(timer); user = null; unlocked = false; R = {}; showFirstScreen(); }
+
+  // ---- access list (blacklist / whitelist), one router at a time ----
+  function aclDevices() {
+    var r = R[acl.rid], seen = {}, out = [];
+    if (!r) return out;
+    r.devices.forEach(function (d) { seen[d.mac] = 1; out.push({ mac: d.mac, name: d.name }); });
+    if (acl.saved) acl.saved.list.forEach(function (m) { if (!seen[m.mac]) { seen[m.mac] = 1; out.push({ mac: m.mac, name: m.remark || m.hostname }); } });
+    return out;
+  }
+  function renderAcl() {
+    var rs = $("#acl-rt"); rs.hidden = aclRouters().length < 2;
+    if (aclRouters().length > 1) rs.innerHTML = aclRouters().map(function (r) { return '<option value="' + esc(r.id) + '"' + (r.id === acl.rid ? " selected" : "") + ">" + esc(r.name) + "</option>"; }).join("");
+    document.querySelectorAll("#acl-mode .chip").forEach(function (c) { c.setAttribute("aria-pressed", c.dataset.m === acl.mode ? "true" : "false"); });
+    $("#acl-hint").textContent = t("acl_hint_" + acl.mode);
+    $("#acl-save").disabled = acl.busy || !acl.loaded;
+    var box = $("#acl-list"), list = aclDevices();
+    if (!acl.loaded) { box.textContent = t("acl_loading"); return; }
+    if (!list.length) { box.textContent = t("acl_empty"); return; }
+    box.innerHTML = list.map(function (d) {
+      var me = d.mac === acl.me, forced = me, on = me ? acl.mode === "pass" : !!acl.sel[d.mac];
+      return '<label class="acl-row"><input type="checkbox" data-mac="' + d.mac + '"' + (on ? " checked" : "") + (forced ? " disabled" : "") + '><span>' + esc(d.name) + (me ? " · " + esc(t("acl_you")) : "") + '<small>' + d.mac + '</small></span></label>';
+    }).join("");
+  }
+  function loadAcl() {
+    if (!acl.rid) acl.rid = aclDefault();
+    var rid = acl.rid;
+    return api("/api/filter", { rid: rid }).then(function (f) {
+      if (rid !== acl.rid) return;
+      acl.saved = f; acl.me = f.me; acl.mode = f.mode; acl.sel = {}; f.list.forEach(function (m) { acl.sel[m.mac] = true; }); acl.loaded = true; renderAcl();
+    }).catch(function (e) { $("#acl-msg").textContent = e.message; });
+  }
+  function reloadAcl() { acl.loaded = false; acl.saved = null; acl.busy = true; renderAcl(); return loadAcl().then(function () { acl.busy = false; renderAcl(); }); }
+  document.addEventListener("visibilitychange", function () { document.documentElement.classList.toggle("bg", document.hidden); });
+  document.querySelectorAll("[data-wt]").forEach(function (b) { b.addEventListener("click", function () { $("#view-wifi").dataset.tab = b.dataset.wt; document.querySelectorAll("[data-wt]").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); }); }); });
+  $("#acl-rt").addEventListener("change", function () { acl.rid = this.value; reloadAcl(); });
+  document.querySelectorAll("#acl-mode .chip").forEach(function (c) { c.addEventListener("click", function () { acl.mode = c.dataset.m; renderAcl(); }); });
+  $("#acl-list").addEventListener("change", function (e) { var c = e.target.closest("[data-mac]"); if (c) acl.sel[c.dataset.mac] = c.checked; });
+  $("#acl-save").addEventListener("click", function () {
+    var b = this;
+    if (b.dataset.armed !== "1") { b.dataset.armed = "1"; b.textContent = t("acl_confirm"); setTimeout(function () { b.dataset.armed = ""; b.textContent = t("acl_save"); }, 3500); return; }
+    b.dataset.armed = ""; b.textContent = t("acl_save");
+    var macs = Object.keys(acl.sel).filter(function (m) { return acl.sel[m] && m !== acl.me; });
+    acl.busy = true; renderAcl(); $("#acl-msg").textContent = "";
+    api("/api/filter/set", { rid: acl.rid, mode: acl.mode, macs: macs }).then(function () { toast(t("acl_saved")); return loadAcl(); })
+      .catch(function (er) { toast(er.message); $("#acl-msg").textContent = er.message; }).then(function () { acl.busy = false; renderAcl(); });
+  });
+
+  function findDev(key) { var p = key.split("|"); return state.devices.filter(function (x) { return x.rid === p[0] && x.mac === p[1]; })[0]; }
+  $("#devices").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-block]"); if (!b) return;
+    var key = b.dataset.block, d = findDev(key), want = !d.blocked;
+    if (want && b.dataset.armed !== "1") { b.dataset.armed = "1"; b.textContent = t("confirm_block"); setTimeout(function () { if (b.isConnected) { b.dataset.armed = ""; b.textContent = t("block"); } }, 3500); return; }
+    pending[key] = true; renderDevices();
+    api("/api/block", { rid: d.rid, mac: d.mac, blocked: want }).then(function () { log(want ? "e_block" : "e_unblock", { n: d.name }); toast(t(want ? "x_blocked" : "x_unblocked", { n: d.name })); })
+      .catch(function (er) { toast(er.message); }).then(function () { delete pending[key]; return poll(); });
+  });
+  $("#devices").addEventListener("change", function (e) {
+    var s = e.target.closest("[data-limit]"); if (!s) return;
+    var key = s.dataset.limit, d = findDev(key), m = +s.value;
+    pending[key] = true; renderDevices();
+    api("/api/limit", { rid: d.rid, mac: d.mac, kbps: m ? m * 125 : 0 }).then(function () { var l = m ? num(m) + " Mbps" : t("no_limit"); log("e_limit", { n: d.name, l: l }); toast(t("x_limit", { n: d.name, l: l })); })
+      .catch(function (er) { toast(er.message); }).then(function () { delete pending[key]; return poll(); });
+  });
+  $("#rbar").addEventListener("click", function (e) {
+    var c = e.target.closest("[data-r]"); if (!c) return;
+    sel = c.dataset.r; if (sel !== "all" && acl.rid !== sel && aclRouters().some(function (r) { return r.id === sel; })) { acl.rid = sel; if (route === "wifi") reloadAcl(); else acl.loaded = false; }
+    renderAll();
+  });
+  $("#search").addEventListener("input", function (e) { query = e.target.value; renderDevices(); });
+  document.querySelectorAll(".tile.tap").forEach(function (t) {
+    function go() { if (t.dataset.route) { location.hash = "#" + t.dataset.route; return; } document.querySelector('.chip[data-f="' + t.dataset.go + '"]').click(); location.hash = "#devices"; }
+    t.addEventListener("click", go);
+    t.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
+  });
+  document.querySelectorAll(".chip").forEach(function (c) { c.addEventListener("click", function () { filter = c.dataset.f; document.querySelectorAll(".chip").forEach(function (x) { x.setAttribute("aria-pressed", x === c ? "true" : "false"); }); renderDevices(); }); });
+
+  $("#login-form").addEventListener("submit", function (e) {
+    e.preventDefault(); $("#login-err").textContent = "";
+    api("/api/login", { password: $("#l-pass").value }).then(function (u) { user = u; $("#l-pass").value = ""; start(); })
+      .catch(function (er) { $("#login-err").textContent = er.status === 401 ? t("login_bad") : er.message; });
+  });
+  $("#pin-login-btn").addEventListener("click", function () {
+    var pin = $("#l-pin").value;
+    if (!/^[0-9]{6}$/.test(pin) || !Native.verifyAppPin(pin)) { $("#login-err").textContent = t("pin_bad"); $("#l-pin").value = ""; return; }
+    $("#login-err").textContent = ""; $("#l-pin").value = ""; completeUnlock();
+  });
+  $("#pin-save").addEventListener("click", function () {
+    var p = $("#pin-new").value, c = $("#pin-confirm").value;
+    if (!/^[0-9]{6}$/.test(p) || p !== c) { $("#pin-status").textContent = t("pin_match"); return; }
+    if (Native.setAppPin(p)) { $("#pin-new").value = $("#pin-confirm").value = ""; renderBio(); toast(t("pin_saved")); }
+    else $("#pin-status").textContent = t("pin_match");
+  });
+  $("#pin-disable").addEventListener("click", function () {
+    if (!pinExists()) return;
+    if (Native.clearAppPin()) { $("#pin-new").value = $("#pin-confirm").value = ""; renderBio(); toast(t("pin_removed")); }
+  });
+  function setLang(l) { lang = l; renderBio(); try { localStorage.setItem("wifi-lang", lang); } catch (e) {} applyStatic(); renderAcl(); renderAll(); markLang(); }
+  function markLang() { document.querySelectorAll("[data-lang-set]").forEach(function (c) { c.setAttribute("aria-pressed", c.dataset.langSet === lang ? "true" : "false"); }); }
+  document.querySelectorAll("[data-lang-set]").forEach(function (c) { c.addEventListener("click", function () { setLang(c.dataset.langSet); }); });
+  markLang();
+  function openRouter(id) {
+    var r = R[id] || R[curId()], saved = allRouters().filter(function (x) { return x.id === id; })[0], u = (r && r.url) || (saved && saved.url) || (routers()[0] && routers()[0].url) || (allRouters()[0] && allRouters()[0].url) || "http://192.168.1.1", ok = false;
+    try { ok = Native.openUrl(u); } catch (e) {}
+    if (!ok) { try { window.open(u, "_blank"); } catch (e) {} }
+  }
+  $("#open-router").addEventListener("click", function () { openRouter(); });
+  $("#router-list").addEventListener("click", function (e) {
+    var o = e.target.closest("[data-ropen]"); if (o) { openRouter(o.dataset.ropen); return; }
+    var toggle = e.target.closest("[data-rtoggle]");
+    if (toggle) {
+      var target = allRouters().filter(function (r) { return r.id === toggle.dataset.rtoggle; })[0];
+      if (!target) return;
+      target.active = target.active === false;
+      saveCfg(); sel = "all";
+      if (!routers().some(function (r) { return r.id === acl.rid; })) { acl.rid = aclDefault(); acl.loaded = false; }
+      state.devices = []; state.guests = []; series.d = []; series.u = [];
+      buildClients(); renderAll();
+      toast(t(target.active ? "r_active" : "r_inactive") + ": " + routerLabel(target));
+      poll();
+      if (route === "wifi" && acl.rid) reloadAcl();
+      return;
+    }
+    var d = e.target.closest("[data-rdel]"); if (!d) return;
+    if (allRouters().length <= 1) { toast(t("r_last")); return; }
+    if (d.dataset.armed !== "1") { d.dataset.armed = "1"; d.textContent = t("r_confirm"); setTimeout(function () { if (d.isConnected) { d.dataset.armed = ""; d.textContent = t("r_remove"); } }, 3500); return; }
+    cfg.routers = cfg.routers.filter(function (r) { return r.id !== d.dataset.rdel; }); saveCfg(); delete R[d.dataset.rdel];
+    if (acl.rid === d.dataset.rdel) { acl.rid = ""; acl.loaded = false; }
+    buildClients(); poll();
+  });
+  $("#add-open").addEventListener("click", function () { var f = $("#add-form"); f.hidden = !f.hidden; this.setAttribute("aria-expanded", f.hidden ? "false" : "true"); if (!f.hidden) f.scrollIntoView({ behavior: "smooth", block: "nearest" }); });
+  $("#add-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var err = $("#add-err"), name = "Router " + (allRouters().length + 1), url = $("#a-url").value.trim().replace(/\/+$/, ""), pw = $("#a-pw").value;
+    err.textContent = ""; if (!/^https?:\/\//i.test(url)) url = "http://" + url;
+    if (allRouters().some(function (r) { return r.url.toLowerCase() === url.toLowerCase(); })) { err.textContent = t("r_dup"); return; }
+    $("#add-btn").disabled = true; err.textContent = t("s_checking");
+    var type = "";
+    resolveType(url, pw, $("#a-type").value).then(function (r) {
+      if (!r.type) throw new Error(r.notes && r.notes.some(function (n) { return /rejected/.test(n); }) ? t("s_rbad") : t("s_unk"));
+      type = r.type; return new RouterClient({ url: url, password: pw, native: nativeApi, type: type }).snapshot();
+    }).then(function () {
+      cfg.routers.push({ id: "r" + Date.now().toString(36), name: name, url: url, rpw: pw, type: type, active: true }); saveCfg(); buildClients();
+      $("#a-pw").value = ""; err.textContent = ""; toast(t("r_added")); $("#add-form").hidden = true; $("#add-open").setAttribute("aria-expanded", "false"); acl.loaded = false; poll();
+    }).catch(function (er) { err.textContent = er.message; }).then(function () { $("#add-btn").disabled = false; });
+  });
+  // ---- pull down at the top of any page to refresh ----
+  (function () {
+    var el = $("#ptr"), y0 = null, dy = 0, busy = false, LIM = 80;
+    function top() { return (window.pageYOffset || document.documentElement.scrollTop || 0) <= 0; }
+    function place(v, txt) { el.textContent = txt; el.className = "ptr show"; el.style.transform = "translate(-50%, " + (v - 60) + "px)"; }
+    function hide() { el.className = "ptr"; el.style.transform = ""; }
+    function refresh() {
+      busy = true; place(24, t("ptr_loading"));
+      var jobs = [poll()]; if (route === "wifi" && !acl.busy) jobs.push(reloadAcl());
+      Promise.all(jobs.map(function (p) { return Promise.resolve(p).catch(function () {}); })).then(function () { busy = false; hide(); });
+    }
+    document.addEventListener("touchstart", function (e) {
+      if (busy || !unlocked || $("#app").hidden || e.touches.length !== 1 || !top() || e.target.closest("select,input,textarea")) { y0 = null; return; }
+      y0 = e.touches[0].clientY; dy = 0;
+    }, { passive: true });
+    document.addEventListener("touchmove", function (e) {
+      if (y0 === null || busy) return;
+      dy = e.touches[0].clientY - y0;
+      if (dy <= 0 || !top()) { if (dy <= 0) hide(); return; }
+      place(Math.min(dy / 2, 60), t(dy / 2 >= LIM / 2 ? "ptr_release" : "ptr_pull"));
+    }, { passive: true });
+    document.addEventListener("touchend", function () {
+      if (y0 === null || busy) return;
+      var go = dy / 2 >= LIM / 2; y0 = null; dy = 0;
+      if (go) refresh(); else hide();
+    }, { passive: true });
+    document.addEventListener("touchcancel", function () { y0 = null; hide(); }, { passive: true });
+  })();
+  // ---- ISP contact buttons: each user saves their own ISP number on this phone ----
+  var BKASH_PKG = "com.bKash.customerapp", IMO_PKG = "com.imo.android.imoim";
+  function ispLoad() { try { var o = JSON.parse(localStorage.getItem("rm-isp") || "null"); return o && o.num ? o : null; } catch (e) { return null; } }
+  function ispNum() { var d = ispLoad(); return d ? d.num : ""; }
+  // Accepts 01XXXXXXXXX, +8801XXXXXXXXX, 8801XXXXXXXXX, 008801XXXXXXXXX; returns the +880 form, or "" when it does not look like a phone number.
+  function ispNorm(raw) {
+    var x = String(raw || "").replace(/[\s\-().]/g, "");
+    if (/^\+\d{7,15}$/.test(x)) return x;
+    if (/^00\d{7,15}$/.test(x)) return "+" + x.slice(2);
+    if (/^880\d{9,10}$/.test(x)) return "+" + x;
+    if (/^01\d{9}$/.test(x)) return "+88" + x;
+    if (/^\d{7,15}$/.test(x)) return x;
+    return "";
+  }
+  function ispRender() {
+    var d = ispLoad(), has = !!d, add = $("#isp-add");
+    $("#isp-btns").hidden = !has;
+    $("#isp-num").textContent = has ? ((d.name ? d.name + " · " : "") + d.num) : t("isp_none");
+    add.setAttribute("data-i18n", has ? "isp_edit" : "isp_add"); add.textContent = t(has ? "isp_edit" : "isp_add");
+  }
+  // The logos come from the apps installed on this phone (not drawn by us). If an app is missing, its name is shown instead.
+  function loadIcon(btn, pkgs) {
+    for (var i = 0; i < pkgs.length; i++) {
+      var b64 = ""; try { b64 = Native.appIcon(pkgs[i]) || ""; } catch (e) {}
+      if (b64) { btn.innerHTML = '<img alt="" src="data:image/png;base64,' + b64 + '">'; return; }
+    }
+  }
+  function loadIcons() { loadIcon($("#isp-wa"), ["com.whatsapp", "com.whatsapp.w4b"]); loadIcon($("#isp-bkash"), [BKASH_PKG]); loadIcon($("#isp-imo"), [IMO_PKG, "com.imo.android.imoimbeta"]); }
+  loadIcons();
+  function openLink(u) { var ok = false; try { ok = Native.openUrl(u); } catch (e) {} if (!ok) { try { window.open(u, "_blank"); ok = true; } catch (e) {} } return ok; }
+  function copyTxt(txt) { var ok = false; try { ok = Native.copyText(txt); } catch (e) {} if (!ok) { try { navigator.clipboard.writeText(txt); ok = true; } catch (e) {} } return ok; }
+  $("#isp-add").addEventListener("click", function () {
+    var d = ispLoad();
+    $("#isp-name").value = d ? d.name || "" : ""; $("#isp-in").value = d ? d.num : ""; $("#isp-err").textContent = "";
+    $("#isp-del").hidden = !d; $("#isp-form").hidden = false; this.hidden = true; $("#isp-in").focus();
+  });
+  function ispClose() { $("#isp-form").hidden = true; $("#isp-add").hidden = false; }
+  $("#isp-cancel").addEventListener("click", ispClose);
+  $("#isp-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var n = ispNorm($("#isp-in").value);
+    if (!n) { $("#isp-err").textContent = t("isp_bad"); return; }
+    try { localStorage.setItem("rm-isp", JSON.stringify({ name: $("#isp-name").value.trim().slice(0, 40), num: n })); } catch (er) {}
+    ispClose(); ispRender(); toast(t("isp_saved"));
+  });
+  $("#isp-del").addEventListener("click", function () { try { localStorage.removeItem("rm-isp"); } catch (e) {} ispClose(); ispRender(); });
+  ispRender();
+  $("#isp-wa").addEventListener("click", function () { var n = ispNum(); if (n && !openLink("https://wa.me/" + n.replace(/\D/g, ""))) toast(t("isp_nowa")); });
+  $("#isp-call").addEventListener("click", function () { var n = ispNum(); if (n) openLink("tel:" + n); });
+  $("#isp-imo").addEventListener("click", function () {
+    var n = ispNum(); if (!n) return; copyTxt(n);
+    var opened = false; try { opened = Native.openApp(IMO_PKG) || Native.openApp("com.imo.android.imoimbeta"); } catch (e) {}
+    if (opened) toast(t("isp_imo_copied")); else { toast(t("isp_noimo")); openLink("https://play.google.com/store/apps/details?id=" + IMO_PKG); }
+  });
+  $("#isp-bkash").addEventListener("click", function () {
+    var n = ispNum(); if (!n) return; copyTxt(n);
+    var opened = false; try { opened = Native.openApp(BKASH_PKG); } catch (e) {}
+    if (opened) toast(t("isp_copied")); else { toast(t("isp_nobkash")); openLink("https://play.google.com/store/apps/details?id=" + BKASH_PKG); }
+  });
+
+  // ---- Help: developer contact ----
+  var DEV_MAIL = "soyeib.ahmed.7@gmail.com", DEV_WA = "01340065885", DEV_WA_INTL = "8801340065885";
+  function openHelp() { $("#help-mail").textContent = DEV_MAIL; $("#help-wa").textContent = DEV_WA; $("#help-sheet").hidden = false; }
+  $("#help-first").addEventListener("click", openHelp);
+  $("#help-btn").addEventListener("click", openHelp);
+  $("#help-close").addEventListener("click", function () { $("#help-sheet").hidden = true; });
+  $("#help-sheet").addEventListener("click", function (e) { if (e.target === this) this.hidden = true; });
+  $("#help-mail-open").addEventListener("click", function () { var ok = false; try { ok = Native.openUrl("mailto:" + DEV_MAIL); } catch (e) {} if (!ok) { copyTxt(DEV_MAIL); toast(t("help_copied")); } });
+  $("#help-mail-copy").addEventListener("click", function () { copyTxt(DEV_MAIL); toast(t("help_copied")); });
+  $("#help-wa-open").addEventListener("click", function () { if (!openLink("https://wa.me/" + DEV_WA_INTL)) { copyTxt(DEV_WA); toast(t("help_copied")); } });
+  $("#help-wa-copy").addEventListener("click", function () { copyTxt(DEV_WA); toast(t("help_copied")); });
+
+  // ---------- AI assistant ----------
+  var AI = { tab: "chat", log: [], busy: false };
+  function aiCfg() { try { var c = JSON.parse(localStorage.getItem("rm-ai") || "null"); return c && c.url && c.token ? c : null; } catch (e) { return null; } }
+  function knownSet() { try { return JSON.parse(localStorage.getItem("rm-known") || "[]"); } catch (e) { return []; } }
+  function isKnown(mac) { return knownSet().indexOf(mac) > -1; }
+  function hostOf(u) { return String(u || "").replace(/^https?:\/\//, "").replace(/\/.*$/, ""); }
+  var aiEnv = {
+    devices: function () { return state.devices; },
+    routers: function () { return routers().map(function (r) { return { id: r.id, name: routerLabel(r), type: r.type || "ac5", host: hostOf(r.url) }; }); },
+    api: api, poll: function () { return poll(); }, isMe: function (d) { return isMe(d); }, known: isKnown, setKnown: function (mac, on) { var a = knownSet(), i = a.indexOf(mac); if (on && i < 0) a.push(mac); if (!on && i > -1) a.splice(i, 1); try { localStorage.setItem("rm-known", JSON.stringify(a)); } catch (e) {} },
+    health: function () { return aiHealth(); }
+  };
+  var aiTools = AiTools.Tools(aiEnv);
+  function aiHealth() {
+    var devs = state.devices.map(function (d) { var o = Object.create(d); o.isMe = isMe(d); return o; });
+    return AiTools.analyze({ devices: devs, known: isKnown, routers: routers().map(function (c) { var r = R[c.id] || {}; return { id: c.id, name: routerLabel(c), net: r.net, wifi: r.wifi }; }) });
+  }
+  function aiState() {
+    return {
+      routers: routers().map(function (c) { var r = R[c.id] || {}, n = r.net || {}; return { name: routerLabel(c), model: { ac5: "Tenda AC5", f3: "Tenda F3", netis: "Netis" }[c.type] || "Tenda AC5", internet: n.state || "unknown", wan_type: n.type || "", link_mbps: n.linkMbps || null, wifi_security: r.wifi && r.wifi.security || "", firmware: "not exposed by this app", online_devices: (r.devices || []).filter(function (d) { return d.online; }).length, guest_devices: (r.guests || []).length }; }),
+      devices: state.devices.map(function (d) { var f = aiTools.full(d); delete f.mac_tail; f.mac_tail = d.mac.slice(-5); return f; })
+    };
+  }
+  function aiHttp(m, u, h, b) { return nativeApi.http(m, u, h, b); }
+  function aiErr(e) {
+    var m = String(e && e.message || e);
+    if (m === "ai_auth") { var c = aiCfg(); return t("ae_auth") + (c ? " (" + c.token.length + ")" : ""); } if (m === "ai_busy") return t("ae_busy"); if (m === "ai_empty") return t("ae_empty");
+    if (m.indexOf("ai_backend:") === 0) return t("ae_backend", { s: m.slice(11, 60) });
+    return t("ae_net") + " [" + m.slice(0, 90) + "]";
+  }
+  function saveLog() { try { localStorage.setItem("rm-chat", JSON.stringify(AI.log.slice(-30))); } catch (e) {} }
+  try { AI.log = JSON.parse(localStorage.getItem("rm-chat") || "[]"); } catch (e) { AI.log = []; }
+  function actionHtml(a) {
+    var res = a.result || {}, name = t("fn_" + a.name), tgt = res.device ? " · " + esc(res.device.name) : "";
+    if (/^(list_devices|top_bandwidth|network_health|blacklist_show)$/.test(a.name)) return '<div class="act ok">✓ ' + esc(name) + " · " + esc(t("ax_read")) + "</div>";
+    return res.ok && res.verified ? '<div class="act ok">✓ ' + esc(name) + tgt + " · " + esc(t("ax_ok")) + "</div>" : '<div class="act bad">✕ ' + esc(name) + tgt + " · " + esc(t("ax_fail")) + ": " + esc(res.reason || res.error || "") + "</div>";
+  }
+  function renderChat() {
+    var cfg = aiCfg(); aiSync();
+    var html = '<div class="msg ai">' + esc(t("ai_hello")) + "</div>" + AI.log.map(function (m) {
+      return m.role === "user" ? '<div class="msg me">' + esc(m.text) + "</div>" : '<div class="msg ai">' + (m.actions || []).map(actionHtml).join("") + (m.err ? '<span class="aerr">' + esc(m.text) + "</span>" : esc(m.text)) + "</div>";
+    }).join("") + (AI.busy ? '<div class="msg ai dots">' + esc(t("ai_think")) + "</div>" : "");
+    var box = $("#chat-log"); box.innerHTML = html; box.scrollTop = box.scrollHeight;
+    $("#chat-send").disabled = AI.busy || !cfg; $("#chat-in").disabled = !cfg;
+    $("#chat-quick").innerHTML = ["q1", "q2", "q3", "q4"].map(function (k) { return '<button type="button" class="chip" data-q="' + k + '"' + (cfg ? "" : " disabled") + ">" + esc(t(k)) + "</button>"; }).join("");
+  }
+  function send(text) {
+    var cfg = aiCfg(); text = String(text || "").trim(); if (!cfg || !text || AI.busy) return;
+    var hist = AI.log.filter(function (m) { return !m.err; }).map(function (m) { return { role: m.role, text: m.text }; });
+    AI.log.push({ role: "user", text: text }); AI.busy = true; saveLog(); renderChat();
+    var agent = AiTools.Agent(cfg, aiHttp, aiTools, aiState);
+    agent.ask(hist, text).then(function (r) {
+      AI.log.push({ role: "model", text: r.tooMany ? t("ae_many") : (r.text || t("ae_empty")), actions: r.actions, err: !!r.tooMany || !r.text });
+      var acted = r.actions.some(function (a) { return /^(block|unblock|blacklist_add|blacklist_remove|set_speed|rename|mark_)/.test(a.name) && a.result && a.result.ok; });
+      r.actions.forEach(function (a) { if (a.result && a.result.ok && /^(block|unblock|blacklist_add|blacklist_remove|set_speed|rename|mark_)/.test(a.name)) log("e_ai", { n: t("fn_" + a.name) + (a.result.device ? ": " + a.result.device.name : "") }); });
+      return acted ? poll() : null;
+    }).catch(function (e) { AI.log.push({ role: "model", text: aiErr(e), err: true }); }).then(function () { AI.busy = false; saveLog(); renderChat(); renderAi(); });
+  }
+  $("#chat-form").addEventListener("submit", function (e) { e.preventDefault(); var v = $("#chat-in").value; $("#chat-in").value = ""; send(v); });
+  $("#chat-quick").addEventListener("click", function (e) { var b = e.target.closest("[data-q]"); if (b) send(t(b.dataset.q)); });
+  $("#chat-clear").addEventListener("click", function () { AI.log = []; saveLog(); renderChat(); });
+  var aiOpen = false;
+  function aiSync() { var has = !!aiCfg(); $("#ai-cfg").hidden = has && !aiOpen; $("#ai-gear").hidden = !has; }
+  $("#ai-gear").addEventListener("click", function () { aiOpen = !aiOpen; aiSync(); });
+  document.querySelectorAll("[data-at]").forEach(function (b) { b.addEventListener("click", function () { AI.tab = b.dataset.at; renderAi(); }); });
+  function tx(i) { return t(i.key, i.v); }
+  function renderAi() {
+    document.querySelectorAll("[data-at]").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.at === AI.tab ? "true" : "false"); });
+    ["chat", "health", "dev", "sec"].forEach(function (k) { $("#ai-" + k).hidden = k !== AI.tab; });
+    if (!unlocked) return;
+    if (AI.tab === "chat") renderChat();
+    var h = aiHealth(), lvl = { ok: "good", info: "", warn: "warn", bad: "bad" };
+    if (AI.tab === "health") {
+      var recs = []; h.items.forEach(function (i) { var k = "r_" + i.key.slice(2); if (t(k) && t(k) !== k && recs.indexOf(t(k)) < 0) recs.push(t(k)); });
+      $("#ai-health").innerHTML = '<div class="panel score"><h2>' + esc(t("hp_score")) + '</h2><div class="sc ' + (h.score >= 80 ? "good" : h.score >= 50 ? "warn" : "bad") + '"><b>' + h.score + "</b><span>/100 · " + esc(t(h.score >= 80 ? "ph_good" : h.score >= 50 ? "ph_fair" : "ph_poor")) + "</span></div></div>" +
+        '<div class="panel"><h2>' + esc(t("hp_insights")) + "</h2>" + h.items.map(function (i) { return '<div class="ins ' + i.level + '">' + esc(tx(i)) + "</div>"; }).join("") + "</div>" +
+        '<div class="panel"><h2>' + esc(t("hp_recs")) + "</h2><ul class=\"recs\">" + recs.map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("") + "</ul>" + (aiCfg() ? '<button class="btn sm" type="button" id="ai-explain">' + esc(t("hp_ask")) + "</button>" : "") + "</div>";
+    }
+    if (AI.tab === "dev") {
+      $("#ai-dev").innerHTML = '<div class="panel"><h2>' + esc(t("di_title")) + "</h2>" + (state.devices.length ? state.devices.slice().sort(function (a, b) { return (b.online ? 1 : 0) - (a.online ? 1 : 0); }).map(function (d) {
+        var k = isKnown(d.mac), me = isMe(d), sp = d.online ? "↓ " + num(mbps(d.downKBps), 2) + " ↑ " + num(mbps(d.upKBps), 2) + " Mbps" : t("di_off");
+        return '<div class="di"><div class="di-n">' + esc(d.name) + rtag(d) + (me ? ' <span class="pill good">' + esc(t("di_me")) + "</span>" : "") + (d.blocked ? ' <span class="pill bad">' + esc(t("di_blk")) + "</span>" : "") + "<small>" + esc(d.ip) + " · " + esc(d.mac) + " · " + esc(sp) + '</small></div><button type="button" class="chip" data-known="' + esc(d.mac) + '" aria-pressed="' + (k ? "true" : "false") + '">' + esc(t(k ? "di_known" : "di_new")) + "</button></div>";
+      }).join("") : '<p class="hint">' + esc(t("di_none")) + "</p>") + '<div class="acl-actions"><button class="btn sm" type="button" id="di-all">' + esc(t("di_markall")) + '</button></div><p class="hint">' + esc(t("di_note")) + "</p></div>";
+    }
+    if (AI.tab === "sec") {
+      var sec = h.items.filter(function (i) { return /^h_(open|guest_open|unknown|blocked|net)$/.test(i.key); });
+      $("#ai-sec").innerHTML = '<div class="panel"><h2>' + esc(t("sa_title")) + "</h2>" + (sec.length ? sec.map(function (i) { return '<div class="ins ' + i.level + '">' + esc(tx(i)) + "</div>"; }).join("") : '<div class="ins ok">' + esc(t("sa_ok")) + "</div>") + '<ul class="recs"><li>' + esc(t("sa_tip1")) + "</li><li>" + esc(t("sa_tip2")) + "</li><li>" + esc(t("sa_tip3")) + '</li></ul><p class="hint">' + esc(t("sa_note")) + "</p></div>";
+    }
+  }
+  document.addEventListener("click", function (e) {
+    var k = e.target.closest("[data-known]"); if (k) { var a = knownSet(), i = a.indexOf(k.dataset.known); if (i > -1) a.splice(i, 1); else a.push(k.dataset.known); try { localStorage.setItem("rm-known", JSON.stringify(a)); } catch (x) {} renderAi(); return; }
+    if (e.target.closest("#di-all")) { var s2 = knownSet(); state.devices.forEach(function (d) { if (d.online && s2.indexOf(d.mac) < 0) s2.push(d.mac); }); try { localStorage.setItem("rm-known", JSON.stringify(s2)); } catch (x) {} renderAi(); return; }
+    if (e.target.closest("#ai-explain")) { AI.tab = "chat"; renderAi(); send(t("q2")); }
+  });
+  $("#ai-save").addEventListener("click", function () {
+    var u = $("#ai-url").value.trim(), k = $("#ai-token").value.trim();
+    if (!/^https:\/\//i.test(u) || !k) { $("#ai-msg").textContent = t("ae_net"); return; }
+    try { localStorage.setItem("rm-ai", JSON.stringify({ url: u, token: k })); } catch (e) {} aiOpen = false; $("#ai-msg").textContent = t("ai_saved") + " (" + k.length + ")"; renderChat();
+  });
+  $("#ai-off").addEventListener("click", function () { try { localStorage.removeItem("rm-ai"); } catch (e) {} aiOpen = false; $("#ai-url").value = ""; $("#ai-token").value = ""; $("#ai-msg").textContent = t("ai_removed"); renderChat(); });
+  (function () { var c = aiCfg(); if (c) { $("#ai-url").value = c.url; $("#ai-token").value = c.token; } })();
+  aiSync();
+  // ---------- fingerprint-focused unlock (system dialog, Android 10+) ----------
+  var bioAvail = false; try { bioAvail = !!Native.biometricAvailable(); } catch (e) {}
+  var bioSeq = 0, bioWait = {};
+  window.BioDone = function (id, ok) { var f = bioWait[id]; if (f) { delete bioWait[id]; f(!!ok); } };
+  function bioOn() { try { return bioAvail && localStorage.getItem("rm-bio") === "1"; } catch (e) { return false; } }
+  function pinExists() { try { return !!Native.hasAppPin(); } catch (e) { return false; } }
+  function bioAsk(cb) { var id = String(++bioSeq + Date.now() % 100000); bioWait[id] = cb; try { Native.biometricAuth(id, t("bio_fp_title"), t("bio_cancel")); } catch (e) { delete bioWait[id]; cb(false); } }
+  function completeUnlock() { if (!unlocked && loadCfg()) { cfg = loadCfg(); unlocked = true; user = USER; start(); } }
+  function bioUnlock() { if (!bioOn() || unlocked) return; bioAsk(function (ok) { if (ok) completeUnlock(); }); }
+  function renderBio() {
+    $("#bio-btn").hidden = !bioOn();
+    $("#pin-login-wrap").hidden = !pinExists();
+    $("#pin-login-btn").hidden = !pinExists();
+    document.querySelectorAll("[data-bio]").forEach(function (c) { c.setAttribute("aria-pressed", (c.dataset.bio === "1") === bioOn() ? "true" : "false"); c.disabled = !bioAvail; });
+    $("#bio-hint").textContent = t(bioAvail ? "bio_set_p" : "bio_na");
+    var tg = $("#bio-tg"); tg.setAttribute("aria-pressed", bioOn() ? "true" : "false"); tg.disabled = !bioAvail; $("#bio-tgt").textContent = t(bioOn() ? "bio_on" : "bio_off");
+    $("#pin-disable").disabled = !pinExists();
+    $("#pin-status").textContent = pinExists() ? t("pin_saved") : t("pin_missing");
+  }
+  $("#bio-btn").addEventListener("click", bioUnlock);
+  $("#bio-tg").addEventListener("click", function () { var c = document.querySelector('[data-bio="' + (bioOn() ? "0" : "1") + '"]'); if (c) c.click(); });
+  document.querySelectorAll("[data-bio]").forEach(function (c) { c.addEventListener("click", function () {
+    if (c.dataset.bio === "0") { try { localStorage.removeItem("rm-bio"); } catch (e) {} renderBio(); return; }
+    bioAsk(function (ok) { if (ok) { try { localStorage.setItem("rm-bio", "1"); } catch (e) {} toast(t("bio_enabled")); } else toast(t("bio_failed")); renderBio(); });
+  }); });
+  $("#logout").addEventListener("click", function () { api("/api/logout", {}).catch(function () {}).then(signedOut); });
+
+  // Add an eye control to every password/PIN field without changing stored values.
+  function installPasswordVisibility() {
+    document.querySelectorAll('input[type="password"]:not([data-eye-ready])').forEach(function (input) {
+      input.dataset.eyeReady = "1";
+      var wrap = document.createElement("div"); wrap.className = "password-wrap";
+      input.parentNode.insertBefore(wrap, input); wrap.appendChild(input);
+      var btn = document.createElement("button"); btn.type = "button"; btn.className = "password-visibility";
+      btn.setAttribute("aria-label", "Show password"); btn.setAttribute("aria-pressed", "false");
+      function draw() {
+        btn.innerHTML = input.type === "password"
+          ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg>'
+          : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18"></path><path d="M10.6 5.2A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.1 3.8M6.2 6.2C3.5 8 2 12 2 12s3.6 7 10 7c1.6 0 3-.4 4.2-1"></path><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"></path></svg>';
+        btn.setAttribute("aria-label", input.type === "password" ? "Show password" : "Hide password");
+        btn.setAttribute("aria-pressed", input.type === "text" ? "true" : "false");
+      }
+      btn.addEventListener("click", function () {
+        var reveal = input.type === "password";
+        input.type = reveal ? "text" : "password";
+        draw();
+      });
+      wrap.appendChild(btn); draw();
+    });
+  }
+  installPasswordVisibility();
+  applyStatic();
+  function showFirstScreen() { cfg = loadCfg(); renderBio(); $("#welcome").hidden = false; $("#setup").hidden = true; $("#login").hidden = true; $("#app").hidden = true; $("#help-first").hidden = true; $("#ni-wrap").hidden = true; }
+  $("#welcome-signup").addEventListener("click", function () { cfg = loadCfg(); $("#welcome").hidden = true; $("#setup").hidden = !!cfg; $("#login").hidden = !cfg; if (!cfg) requestSsidPermission(); else renderBio(); });
+  var DEF_URL = { ac5: "http://192.168.1.1", f3: "http://192.168.0.1", netis: "http://192.168.1.1" };
+  $("#s-type").addEventListener("change", function () { var u = $("#s-url"); if (Object.keys(DEF_URL).some(function (k) { return DEF_URL[k] === u.value.trim(); })) u.value = DEF_URL[this.value] || u.value; });
+  var lastReport = "";
+  function hostOf(u) { return String(u).replace(/^https?:\/\//i, "").replace(/[\/?#].*$/, ""); }
+  function tryTypes(url, pw, order) {
+    var i = 0, notes = [];
+    function next() {
+      if (i >= order.length) return Promise.resolve({ type: "", notes: notes });
+      var ty = order[i++], c = new RouterClient({ url: url, password: pw, native: nativeApi, type: ty });
+      return c.login().then(function (ok) { notes.push(ty + ":" + (ok ? "ok" : "rejected")); return ok ? { type: ty, notes: notes } : next(); }, function (e) { notes.push(ty + ":error " + String(e && e.message || e).slice(0, 60)); return next(); });
+    }
+    return next();
+  }
+  // Works out the router type. "auto" detects it first, then falls back to trying each type once.
+  function resolveType(url, pw, sel) {
+    if (sel !== "auto") return Promise.resolve({ type: sel, notes: ["manual:" + sel] });
+    return niDetect(hostOf(url)).then(function (d) { return d; }, function () { return { type: "" }; }).then(function (d) {
+      if (d.type) return { type: d.type, notes: ["detected:" + d.type] };
+      // A known brand we cannot log in to yet: do not send the password to other routers' login pages.
+      if (d.label) return { type: "", notes: ["detected:" + d.label + "(not supported yet)"] };
+      return tryTypes(url, pw, ["ac5", "f3", "netis"]).then(function (r) { r.notes.unshift("detected:none"); return r; });
+    });
+  }
+  function makeReport(url, r, extra, fp) {
+    var h = hostOf(url), priv = /^(192\.168\.|10\.|172\.(1[6-9]|2\d|3[01])\.)/.test(h) ? h.replace(/:\d+$/, "") : "other-host";
+    return "RouterMate test report v5\naddress: " + priv + "\nresult: " + (r.notes || []).join(", ") + (extra ? "\nerror: " + String(extra).slice(0, 120) : "") + (fp ? "\npages:\n" + fp : "");
+  }
+  // Page-shape clues for the test report. Never passwords, tokens, MACs or outside addresses: only titles, form field names, cookie names, file names.
+  var FP_PATHS = ["/", "/cgi-bin/luci/", "/login.html", "/index.html", "/webpages/login.html", "/userRpm/LoginRpm.htm", "/login.cgi", "/cgi-bin/skk_get.cgi", "/goform/getstok?random=1"];
+  var FP_KW = ["tenda", "netis", "cudy", "tp-link", "tplink", "mercusys", "huawei", "d-link", "xiaomi", "zte", "luci", "openwrt", "md5", "rsa", "aes", "sha256", "kdfiter", "pbkdf2", "nonce", "jsencrypt", "csrf"];
+  function fpClean(s) { return String(s || "").replace(/\b\d{1,3}(\.\d{1,3}){3}\b/g, "<ip>").replace(/\b[0-9a-f]{2}([:-][0-9a-f]{2}){5}\b/gi, "<mac>").replace(/[A-Za-z0-9_\-]{20,}/g, "<tok>").replace(/\s+/g, " ").trim(); }
+  function fpPath(s) { return fpClean(String(s || "").replace(/^https?:\/\/[^\/]*/, "").replace(/[;?#].*$/, "")).slice(0, 60); }
+  function fpAll(re, s, max) { var out = [], m; while ((m = re.exec(s)) && out.length < max) { if (out.indexOf(m[1]) < 0) out.push(m[1]); } return out; }
+  // The router's own login-script code around hashing words (public vendor code). Quoted long strings, IPs and MACs are hidden.
+  var FP_LIB = /jquery|bootstrap|validate|additional-methods|flatpickr|echarts|jsencrypt|moment|chart|datatables|html5shiv|respond|macarons|sha256\.min/i;
+  function fpCode(s, keepStr) { var x = String(s).replace(/\b\d{1,3}(\.\d{1,3}){3}\b/g, "<ip>").replace(/\b[0-9a-f]{2}([:-][0-9a-f]{2}){5}\b/gi, "<mac>"); if (!keepStr) x = x.replace(/(["'])[A-Za-z0-9+\/=_\-]{16,}\1/g, "$1<str>$1"); return x.replace(/\s+/g, " "); }
+  function fpSnips(name, code, maxN, keepStr) {
+    var out = [], last = 0, m, re = /luci_password|sha256|salt|token|pbkdf|kdf|nonce|hash|encrypt/gi;
+    if (code.length <= 4000 && re.test(code)) return "js:" + name + " (whole, " + code.length + " chars) " + fpCode(code, keepStr);
+    re.lastIndex = 0;
+    while ((m = re.exec(code)) && out.length < maxN) {
+      if (m.index < last) continue;
+      var b = Math.min(code.length, m.index + 140);
+      out.push(fpCode(code.slice(Math.max(0, m.index - 90), b), keepStr)); last = b;
+    }
+    return out.length ? "js:" + name + " " + out.map(function (x, i) { return "[" + (i + 1) + "] " + x; }).join(" ") : "";
+  }
+  function fpScripts(base, html) {
+    var s = String(html || "").slice(0, 60000), jobs = [], re = /<script(?![^>]*\ssrc=)[^>]*>([\s\S]*?)<\/script>/gi, m, n = 0;
+    while ((m = re.exec(s)) && n < 4) { var line = fpSnips("inline" + (++n), m[1], 4); if (line) jobs.push(Promise.resolve(line)); }
+    var all = fpAll(/<script[^>]*\ssrc=["']([^"'#]{1,160})/gi, s, 40);
+    // Judge a file by its own name, not its folder (folders like /bootstrap/ also hold the login script).
+    var own = all.map(function (x) { return x.indexOf(base) === 0 ? x.slice(base.length) : x; }).filter(function (x) { return !/^(https?:)?\/\//i.test(x) && !FP_LIB.test(x.split("?")[0].split("/").pop()); });
+    jobs.unshift(Promise.resolve("scripts: " + (own.length ? own.slice(0, 12).map(fpPath).join(" ") : "none-found(of " + all.length + ")")));
+    // Login-looking files first, so they are never cut off by the limit.
+    own.sort(function (a, b) { return (/sysauth|login|auth/i.test(b) ? 1 : 0) - (/sysauth|login|auth/i.test(a) ? 1 : 0); });
+    own.slice(0, 6).forEach(function (x) {
+      var p, nm;
+      try { p = new URL(x, "http://x/cgi-bin/luci/").pathname; } catch (e) { return; }
+      nm = fpPath(p).split("/").pop() || "script";
+      jobs.push(niGet(base + p).then(function (r) {
+        if (!r) return "js:" + nm + " no-answer";
+        var txt = String(r.text || "").slice(0, 120000);
+        return r.status === 200 ? (fpSnips(nm, txt, 5, true) || "js:" + nm + " 200 len=" + txt.length + " (no hash words)") : "js:" + nm + " status=" + r.status + " len=" + txt.length;
+      }, function () { return "js:" + nm + " error"; }));
+    });
+    return Promise.all(jobs).then(function (a) { return a.filter(Boolean).join("\n"); }, function () { return ""; });
+  }
+  function fingerprint(host) {
+    var base = "http://" + host, luciHtml = "";
+    return Promise.all(FP_PATHS.map(function (p) {
+      var shown = p.split("?")[0];
+      return niGet(base + p).then(function (r) {
+        if (!r) return shown + " no-answer";
+        var s = String(r.text || "").slice(0, 40000), low = s.toLowerCase(), tm = s.match(/<title[^>]*>([^<]{0,80})/i);
+        if (p === "/cgi-bin/luci/") luciHtml = s;
+        var kw = FP_KW.filter(function (k) { return low.indexOf(k) >= 0; });
+        var inputs = fpAll(/<input[^>]*\sname=["']([^"']{1,30})["']/gi, s, 8).map(fpClean);
+        var js = fpAll(/<script[^>]*\ssrc=["']([^"'?#]{1,80})/gi, s, 25).map(function (x) { return fpClean(x.split("/").pop()).slice(0, 30); });
+        var act = fpAll(/<form[^>]*\saction=["']([^"']{1,80})/gi, s, 2).map(fpPath);
+        var ck = (r.cookies || []).map(function (c) { return fpClean(String(c).split("=")[0]).slice(0, 20); }).filter(Boolean);
+        return shown + " " + r.status + " len=" + s.length + (r.location ? " loc=" + fpPath(r.location) : "") + (tm ? ' title="' + fpClean(tm[1]).slice(0, 50) + '"' : "") +
+          (kw.length ? " kw=" + kw.join(",") : "") + (inputs.length ? " inputs=" + inputs.join(",") : "") + (act.length ? " form=" + act.join(",") : "") + (js.length ? " js=" + js.join(",") : "") + (ck.length ? " cookie=" + ck.join(",") : "");
+      }, function () { return shown + " error"; });
+    })).then(function (lines) {
+      return fpScripts(base, luciHtml).then(function (js) { return lines.join("\n") + (js ? "\n" + js.slice(0, 6000) : ""); });
+    }, function () { return ""; });
+  }
+  $("#rep-btn").addEventListener("click", function () { try { Native.copyText(lastReport); this.textContent = t("rep_done"); } catch (e) {} });
+  $("#setup-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var err = $("#setup-err"), rname = "Router 1", url = $("#s-url").value.trim().replace(/\/+$/, ""), rpw = $("#s-rpw").value, a1 = $("#s-apw").value, a2 = $("#s-apw2").value;
+    err.textContent = "";
+    if (!/^https?:\/\//i.test(url)) url = "http://" + url;
+    if (a1.length < 6) { err.textContent = t("s_short"); return; }
+    if (a1 !== a2) { err.textContent = t("s_match"); return; }
+    $("#setup-btn").disabled = true; err.textContent = t("s_checking");
+    var rtype = "", rep = $("#rep-btn"); rep.hidden = true;
+    resolveType(url, rpw, $("#s-type").value).then(function (r) {
+      rtype = r.type; lastReport = makeReport(url, r, "");
+      if (!rtype) {
+        var msg = r.notes && r.notes.some(function (n) { return /rejected/.test(n); }) ? t("s_rbad") : t("s_unk");
+        return fingerprint(hostOf(url)).then(function (fp) { lastReport = makeReport(url, r, "", fp); rep.hidden = false; rep.textContent = t("rep_copy"); throw new Error(msg); });
+      }
+      return new RouterClient({ url: url, password: rpw, native: nativeApi, type: rtype }).login();
+    }).then(function (ok) {
+      if (!ok) throw new Error(t("s_rbad"));
+      var salt = Math.random().toString(36).slice(2) + Date.now().toString(36);
+      localStorage.setItem("wifi-cfg", JSON.stringify({ routers: [{ id: "r1", name: rname, url: url, rpw: rpw, type: rtype }], salt: salt, hash: Native.sha256(salt + a1) }));
+      cfg = loadCfg(); unlocked = true; user = USER;
+      $("#setup").hidden = true; $("#s-rpw").value = $("#s-apw").value = $("#s-apw2").value = ""; err.textContent = "";
+      start();
+    }).catch(function (er) { err.textContent = er.message; }).then(function () { $("#setup-btn").disabled = false; });
+  });
+  $("#reset-app").addEventListener("click", function () {
+    var b = this;
+    if (b.dataset.armed !== "1") { b.dataset.armed = "1"; b.textContent = t("app_settings_confirm"); setTimeout(function () { b.dataset.armed = ""; b.textContent = t("app_settings_btn"); }, 3500); return; }
+    try { localStorage.removeItem("wifi-cfg"); } catch (e) {}
+    unlocked = false; R = {}; clearInterval(timer); showFirstScreen();
+  });
+
+  // ---- Wi-Fi details card on the first screen ----
+  function niEsc(x) { return String(x).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function niRow(k, v) { return v ? '<div class="nr"><span>' + t(k) + '</span><span>' + niEsc(v) + '</span></div>' : ""; }
+  function niInfo() { try { return JSON.parse(Native.networkInfo()); } catch (e) { return null; } }
+  function niGet(u) { return nativeApi.http("GET", u, {}, "").then(function (r) { return r; }, function () { return null; }); }
+  function niDetect(gw) {
+    var base = "http://" + gw;
+    return niGet(base + "/").then(function (r0) {
+      var txt = r0 ? (r0.text || "") + " " + (r0.location || "") : "";
+      var loc = r0 && r0.location ? r0.location : "";
+      var next = /^https?:\/\//.test(loc) ? loc : (loc ? base + (loc.charAt(0) === "/" ? "" : "/") + loc : base + "/login.html");
+      return Promise.all([niGet(next), niGet(base + "/goform/getstok?random=" + Math.random()), niGet(base + "/cgi-bin/skk_get.cgi"), niGet(base + "/cgi-bin/luci/")]).then(function (a) {
+        a.forEach(function (r, i) { if (i === 0 && r) txt += " " + (r.text || ""); });
+        var x = txt.toLowerCase(), q = a[1], tx = q ? (q.text || "").trim() : "";
+        var ac5 = !!q && q.status === 200 && tx && !/^</.test(tx);
+        var n2 = a[2] ? (a[2].text || "").trim() : "", nt = !!a[2] && a[2].status === 200 && n2 !== "" && !/^</.test(n2);
+        if (/netis/.test(x) || (!ac5 && nt && !/tenda/.test(x))) return { type: "netis", label: "Netis" };
+        if (ac5) return { type: "ac5", label: "Tenda AC5" };
+        if (/tenda/.test(x)) return { type: "f3", label: "Tenda F3" };
+        if (a[3] && /cudy/i.test(String(a[3].text || "").slice(0, 40000))) return { type: "", label: "Cudy" };
+        var other = /tp-?link/.test(x) ? "TP-Link" : /huawei/.test(x) ? "Huawei" : /d-link/.test(x) ? "D-Link" : /mercusys/.test(x) ? "Mercusys" : /xiaomi/.test(x) ? "Xiaomi" : "";
+        return { type: "", label: other };
+      });
+    });
+  }
+  function renderNetCard() {
+    var c = $("#netcard"), i = niInfo();
+    renderStatus();
+    if (!i) { $("#ni-wrap").hidden = true; return; }
+    if (!i.wifi) { c.innerHTML = '<div class="nh"><span class="dot off"></span>' + t("ni_off") + '<button id="ni-r">' + t("ni_ref") + '</button></div><div style="opacity:.7">' + t("ni_off_h") + '</div>'; $("#ni-r").onclick = renderNetCard; return; }
+    var band = i.freq >= 4900 ? "5G" : (i.freq ? "2.4G" : ""), link = i.linkMbps > 0 ? i.linkMbps + " Mbps" + (band ? " (" + band + ")" : "") : "";
+    c.innerHTML = '<div class="nh"><span class="dot"></span>' + t("ni_conn") + '<button id="ni-r">' + t("ni_ref") + '</button></div>' +
+      (i.gateway ? '<div class="gwb">' + niEsc(i.gateway) + '</div><div class="nb"><button id="ni-c">' + t("ni_copy") + '</button></div>' : "") +
+      niRow("ni_ssid", i.ssid) + niRow("ni_ip", i.ip) + niRow("ni_mask", i.mask) + niRow("ni_dns", i.dns) + niRow("ni_link", link) +
+      '<div class="nr"><span>' + t("ni_router") + '</span><span id="ni-m">' + t("ni_look") + '</span></div><div style="opacity:.55;font-size:11px;margin-top:3px">' + t("ni_note") + '</div>';
+    $("#ni-r").onclick = function () {
+      try {
+        if (Native.hasWifiNamePermission && !Native.hasWifiNamePermission()) {
+          Native.requestWifiNamePermission();
+          return;
+        }
+      } catch (e) {}
+      renderNetCard();
+    };
+    if (!i.gateway) { $("#ni-m").textContent = t("ni_unk"); return; }
+    var useIt = function (type) { var u = $("#s-url"), cur = u.value.trim(); if (!cur || Object.keys(DEF_URL).some(function (k) { return DEF_URL[k] === cur; })) u.value = "http://" + i.gateway; if (type && $("#s-type").value !== "auto") $("#s-type").value = type; };
+    $("#ni-c").onclick = function () { try { Native.copyText(i.gateway); this.textContent = t("ni_copied"); } catch (e) {} };
+    useIt("");
+    niDetect(i.gateway).then(function (d) { $("#ni-m").textContent = d.label || t("ni_unk"); if (d.type) useIt(d.type); }, function () { $("#ni-m").textContent = t("ni_unk"); });
+  }
+
+  // ---- "turn on Wi-Fi" bar ----
+  function wifiBar() {
+    var b = $("#wifi-bar"), i = niInfo();
+    if (!i || i.wifi) { b.hidden = true; document.body.style.paddingTop = ""; document.body.classList.remove("wbar"); return; }
+    b.textContent = t(i.wifiOn === false ? "wb_off" : "wb_no"); b.hidden = false; document.body.style.paddingTop = "40px"; document.body.classList.add("wbar");
+  }
+  $("#wifi-bar").addEventListener("click", function () { try { Native.openWifiSettings(); } catch (e) {} });
+  setInterval(wifiBar, 2500);
+  document.addEventListener("visibilitychange", wifiBar);
+  window.addEventListener("focus", wifiBar);
+  wifiBar();
+  document.addEventListener("click", function (e) {
+    var c = $("#netcard"); if (c.hidden || e.target.closest("#ni-btn") || e.target.closest("#netcard")) return;
+    c.hidden = true;
+  }, true);
+  $("#ni-btn").onclick = function () { var c = $("#netcard"); c.hidden = !c.hidden; if (!c.hidden) renderNetCard(); };
+  renderNetCard();
+  showFirstScreen();
+  if (loadCfg() && bioOn()) setTimeout(bioUnlock, 350);
+})();
+</script>
+
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var saved = "light";
+  try { saved = localStorage.getItem("routermate-theme") === "dark" ? "dark" : "light"; } catch (e) {}
+  function applyTheme(mode) {
+    mode = mode === "dark" ? "dark" : "light";
+    root.setAttribute("data-theme", mode);
+    try { localStorage.setItem("routermate-theme", mode); } catch (e) {}
+    var b = document.getElementById("theme-toggle");
+    if (b) {
+      b.innerHTML = mode === "dark"
+        ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg><span>Light</span>'
+        : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></svg><span>Dark</span>';
+      b.setAttribute("aria-label", mode === "dark" ? "Switch to light theme" : "Switch to dark theme");
+      b.title = b.getAttribute("aria-label");
+    }
+  }
+  applyTheme(saved);
+  var actions = document.querySelector(".top-actions");
+  if (actions && !document.getElementById("theme-toggle")) {
+    var b = document.createElement("button");
+    b.type = "button"; b.id = "theme-toggle"; b.className = "btn";
+    b.addEventListener("click", function () { applyTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark"); });
+    actions.insertBefore(b, actions.firstChild);
+    applyTheme(saved);
+  }
+})();
+</script>
+</body>
+</html>
